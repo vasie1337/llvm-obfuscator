@@ -68,6 +68,8 @@ else()
             list(APPEND _link_libs "${_dia_lib}")
         endif()
 
+        list(APPEND _link_libs ntdll advapi32 shell32 ole32)
+
         target_link_libraries(obfuscator PRIVATE ${_link_libs})
 
         set_target_properties(obfuscator PROPERTIES PREFIX "" SUFFIX ".dll")
