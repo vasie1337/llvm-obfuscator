@@ -1,4 +1,5 @@
 /build/
+/build-rustc/
 /test-bins/bin/
 compile_commands.json
 *.o

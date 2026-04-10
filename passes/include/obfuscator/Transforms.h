@@ -26,4 +26,9 @@ struct BogusControlFlow : public llvm::PassInfoMixin<BogusControlFlow> {
                               llvm::FunctionAnalysisManager &AM);
 };
 
+struct StringEncryption : public llvm::PassInfoMixin<StringEncryption> {
+  llvm::PreservedAnalyses run(llvm::Module &M,
+                              llvm::ModuleAnalysisManager &AM);
+};
+
 } // namespace obfuscator

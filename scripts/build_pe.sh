@@ -71,7 +71,8 @@ $CLANG -O0 -Xclang -disable-O0-optnone -emit-llvm -S \
 echo "Building variants:"
 build_variant "clean"  "none"
 build_variant "bcf"    "bcf"
-build_variant "obfs"   "instsub,mbasub,bcf"
+build_variant "strenc" "strenc"
+build_variant "obfs"   "function(instsub,mbasub,bcf),strenc"
 
 echo ""
 echo "Done:"

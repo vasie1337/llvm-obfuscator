@@ -154,6 +154,36 @@ for src in "$TEST_SRC"/*.c; do
     compare_outputs "$name" "$TMPDIR/${name}_orig" "$TMPDIR/${name}_obfs"
 done
 
+# --- C tests: string encryption only (via opt) ---
+
+for src in "$TEST_SRC"/*.c; do
+    [ -f "$src" ] || continue
+    name="strenc_$(basename "$src" .c)"
+    TOTAL=$((TOTAL + 1))
+
+    $CLANG -O0 -o "$TMPDIR/${name}_orig" "$src" 2>/dev/null
+    if ! $CLANG -O0 -emit-llvm -S "$src" -o "$TMPDIR/${name}.ll" 2>/dev/null; then
+        echo "FAIL: $name (emit IR failed)"
+        FAIL=$((FAIL + 1))
+        continue
+    fi
+
+    if ! $OPT --load-pass-plugin="$PASS_LIB" --passes="strenc" \
+            -S "$TMPDIR/${name}.ll" -o "$TMPDIR/${name}_obfs.ll" 2>/dev/null; then
+        echo "FAIL: $name (opt strenc pass failed)"
+        FAIL=$((FAIL + 1))
+        continue
+    fi
+
+    if ! $CLANG -O0 -x ir "$TMPDIR/${name}_obfs.ll" -o "$TMPDIR/${name}_obfs" 2>/dev/null; then
+        echo "FAIL: $name (clang compile obfuscated IR failed)"
+        FAIL=$((FAIL + 1))
+        continue
+    fi
+
+    compare_outputs "$name" "$TMPDIR/${name}_orig" "$TMPDIR/${name}_obfs"
+done
+
 # --- Rust tests (no_std, IR pipeline through opt-20) ---
 #
 # Pipeline: rustc --emit=llvm-ir -> opt-20 (apply pass) -> clang-20 (link)

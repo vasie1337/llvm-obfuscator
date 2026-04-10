@@ -15,28 +15,32 @@ namespace obfuscator {
 
 // Demote all PHI nodes and register-based values used across basic blocks to
 // stack allocas so that blocks can be reordered freely by the dispatcher.
+// PHIs are demoted first because DemotePHIToStack creates loads that may
+// themselves have cross-block uses; the second pass catches those.
 static void demoteRegisters(Function &F) {
   SmallVector<PHINode *, 16> Phis;
-  SmallVector<Instruction *, 16> Sinks;
+  for (BasicBlock &BB : F)
+    for (Instruction &I : BB)
+      if (auto *PN = dyn_cast<PHINode>(&I))
+        Phis.push_back(PN);
 
+  for (PHINode *PN : Phis)
+    DemotePHIToStack(PN);
+
+  SmallVector<Instruction *, 16> Sinks;
   for (BasicBlock &BB : F) {
     for (Instruction &I : BB) {
-      if (auto *PN = dyn_cast<PHINode>(&I)) {
-        Phis.push_back(PN);
-      } else {
-        for (Use &U : I.uses()) {
-          auto *User = cast<Instruction>(U.getUser());
-          if (User->getParent() != &BB) {
-            Sinks.push_back(&I);
-            break;
-          }
+      if (isa<AllocaInst>(&I))
+        continue;
+      for (Use &U : I.uses()) {
+        auto *User = cast<Instruction>(U.getUser());
+        if (User->getParent() != &BB) {
+          Sinks.push_back(&I);
+          break;
         }
       }
     }
   }
-
-  for (PHINode *PN : Phis)
-    DemotePHIToStack(PN);
 
   for (Instruction *I : Sinks)
     DemoteRegToStack(*I);
@@ -55,10 +59,16 @@ PreservedAnalyses ControlFlowFlattening::run(Function &F,
 
   // The original entry block must stay first; split it so the preamble
   // (allocas, etc.) remains in the true entry and the rest becomes a normal
-  // case block that the dispatcher can target.
+  // case block that the dispatcher can target.  We must split AFTER all
+  // allocas so they stay in the entry block and dominate every other block.
   BasicBlock *EntryBB = OrigBlocks[0];
-  BasicBlock *FirstBody =
-      EntryBB->splitBasicBlock(EntryBB->getFirstNonPHIOrDbgOrLifetime());
+  auto SplitPt = EntryBB->begin();
+  while (SplitPt != EntryBB->end() &&
+         (isa<AllocaInst>(&*SplitPt) || isa<PHINode>(&*SplitPt)))
+    ++SplitPt;
+  if (SplitPt == EntryBB->end())
+    return PreservedAnalyses::all();
+  BasicBlock *FirstBody = EntryBB->splitBasicBlock(&*SplitPt);
 
   // Remove the old entry from the list and replace with the split-off body.
   OrigBlocks[0] = FirstBody;
