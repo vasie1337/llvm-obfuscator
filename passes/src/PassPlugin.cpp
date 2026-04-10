@@ -2,9 +2,23 @@
 
 #include "llvm/Passes/PassBuilder.h"
 #include "llvm/Passes/PassPlugin.h"
-
 using namespace llvm;
 using namespace obfuscator;
+
+static BasicBlockFission parseBBFissionParams(StringRef Params) {
+    unsigned Junk = 2, Max = 64, Split = 1;
+    while (!Params.empty()) {
+        StringRef Token;
+        std::tie(Token, Params) = Params.split(';');
+        StringRef K, V;
+        std::tie(K, V) = Token.split('=');
+        if (K == "junk")       V.getAsInteger(10, Junk);
+        else if (K == "max")   V.getAsInteger(10, Max);
+        else if (K == "split") V.getAsInteger(10, Split);
+    }
+    if (Split == 0) Split = 1;
+    return {Junk, Max, Split};
+}
 
 llvm::PassPluginLibraryInfo getObfuscatorPluginInfo() {
     return {
@@ -13,7 +27,7 @@ llvm::PassPluginLibraryInfo getObfuscatorPluginInfo() {
         LLVM_VERSION_STRING,
         [](PassBuilder &PB) {
             PB.registerPipelineParsingCallback([](StringRef Name, FunctionPassManager &FPM,
-                                                  ArrayRef<PassBuilder::PipelineElement>) {
+                                                  ArrayRef<PassBuilder::PipelineElement> Inner) {
                 if (Name == "instsub") {
                     FPM.addPass(InstructionSubstitution());
                     return true;
@@ -38,8 +52,11 @@ llvm::PassPluginLibraryInfo getObfuscatorPluginInfo() {
                     FPM.addPass(ConstantUnfolding());
                     return true;
                 }
-                if (Name == "bbfission") {
-                    FPM.addPass(BasicBlockFission());
+                if (Name == "bbfission" || Name.starts_with("bbfission<")) {
+                    StringRef Params;
+                    if (Name.starts_with("bbfission<") && Name.ends_with(">"))
+                        Params = Name.slice(10, Name.size() - 1);
+                    FPM.addPass(parseBBFissionParams(Params));
                     return true;
                 }
                 return false;

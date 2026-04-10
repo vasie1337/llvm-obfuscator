@@ -9,7 +9,9 @@ Checks: >
   -readability-identifier-length,
   -readability-magic-numbers,
   -readability-function-cognitive-complexity,
-  -readability-convert-member-functions-to-static
+  -readability-convert-member-functions-to-static,
+  -readability-make-member-function-const,
+  -bugprone-easily-swappable-parameters
 
 WarningsAsErrors: ''
 HeaderFilterRegex: 'passes/include/.*'

@@ -141,8 +141,7 @@ PreservedAnalyses BasicBlockFission::run(Function &F, FunctionAnalysisManager &A
             unsigned Count = 0;
             for (unsigned Idx = 0; Idx < Insts.size() - 1; ++Idx) {
                 Count++;
-                unsigned Threshold = 1 + (Rng() % 2);
-                if (Count >= Threshold) {
+                if (Count >= SplitThreshold) {
                     auto It = std::next(Insts[Idx]->getIterator());
                     if (It != Cur->end() && !isa<BranchInst>(&*It) && !isa<ReturnInst>(&*It) &&
                         !isa<SwitchInst>(&*It) && !isa<UnreachableInst>(&*It)) {
@@ -170,8 +169,8 @@ PreservedAnalyses BasicBlockFission::run(Function &F, FunctionAnalysisManager &A
     // into other junk blocks (or occasionally real fragments), producing a
     // dense tangled CFG web.
     // -----------------------------------------------------------------------
-    constexpr unsigned JunkPerFragment = 2;
-    unsigned NumJunk = Fragments.size() * JunkPerFragment;
+    unsigned NumJunk = static_cast<unsigned>(
+        std::min(Fragments.size() * JunkPerFragment, static_cast<size_t>(MaxJunkBlocks)));
     SmallVector<BasicBlock *, 64> JunkBlocks;
     JunkBlocks.reserve(NumJunk);
 
