@@ -9,7 +9,6 @@ on:
 
 env:
   LLVM_VERSION: "20"
-  LLVM_RELEASE: "20.1.8"
   BUILD_DIR: build
 
 concurrency:
@@ -62,64 +61,6 @@ jobs:
 
       - name: IR tests (FileCheck)
         run: ./tests/run_ir_tests.sh
-
-  windows-plugin:
-    name: Windows — plugin DLL (MSVC + official LLVM)
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download LLVM ${{ env.LLVM_RELEASE }} (prebuilt)
-        shell: pwsh
-        env:
-          LLVM_TAR_URL: https://github.com/llvm/llvm-project/releases/download/llvmorg-${{ env.LLVM_RELEASE }}/clang+llvm-${{ env.LLVM_RELEASE }}-x86_64-pc-windows-msvc.tar.xz
-        run: |
-          Invoke-WebRequest -Uri $env:LLVM_TAR_URL -OutFile llvm.tar.xz
-
-      - name: Extract LLVM
-        shell: pwsh
-        run: |
-          tar -xf llvm.tar.xz
-          $root = Get-ChildItem -Directory | Where-Object { $_.Name -like 'clang+llvm-*' } | Select-Object -First 1
-          if (-not $root) { throw "Could not find extracted clang+llvm-* directory" }
-          $llvmDir = Join-Path $root.FullName "lib\cmake\llvm"
-          if (-not (Test-Path (Join-Path $llvmDir "LLVMConfig.cmake"))) {
-            throw "LLVMConfig.cmake not found under $llvmDir"
-          }
-          "LLVM_ROOT=$($root.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Append
-          "LLVM_DIR=$llvmDir" | Out-File -FilePath $env:GITHUB_ENV -Append
-
-      - name: Install Ninja
-        run: choco install ninja -y
-
-      - uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: x64
-
-      - name: List LLVM libs
-        shell: pwsh
-        run: Get-ChildItem "$env:LLVM_ROOT/lib/LLVM*" -ErrorAction SilentlyContinue
-  
-      - name: Configure & build
-        shell: pwsh
-        run: |
-          cmake -B $env:BUILD_DIR -G Ninja `
-            -DCMAKE_BUILD_TYPE=Release `
-            "-DLLVM_DIR=$env:LLVM_DIR" `
-            -DCMAKE_CXX_COMPILER=cl
-          cmake --build $env:BUILD_DIR
-
-      - name: List build/passes (debug)
-        if: always()
-        shell: pwsh
-        run: Get-ChildItem -Path "$env:BUILD_DIR/passes" -Recurse -ErrorAction SilentlyContinue
-
-      - name: Upload plugin (Windows)
-        uses: actions/upload-artifact@v4
-        with:
-          name: obfuscator-windows-msvc
-          path: build/passes/obfuscator.dll
-          if-no-files-found: warn
 
   lint:
     name: clang-tidy
