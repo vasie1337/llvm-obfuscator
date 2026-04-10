@@ -70,12 +70,7 @@ $CLANG -O0 -Xclang -disable-O0-optnone -emit-llvm -S \
 
 echo "Building variants:"
 build_variant "clean"      "none"
-build_variant "bcf"        "bcf"
-build_variant "cff"        "cff"
-build_variant "simd"       "simd"
-build_variant "constunfold" "constunfold"
-build_variant "strenc"     "strenc"
-build_variant "obfs"       "function(instsub,mbasub,simd,constunfold,cff,bcf),strenc"
+build_variant "obfuscated" "function(instsub,mbasub,simd,constunfold,cff,bcf,bbfission),strenc"
 
 echo ""
 echo "Done:"

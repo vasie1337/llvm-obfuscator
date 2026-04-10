@@ -9,6 +9,7 @@ set(OBFUSCATOR_SOURCES
     src/StringEncryption.cpp
     src/SIMDObfuscation.cpp
     src/ConstantUnfolding.cpp
+    src/BasicBlockFission.cpp
 )
 
 option(OBFUSCATOR_STANDALONE_MODULE
