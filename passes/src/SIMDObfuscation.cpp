@@ -86,7 +86,9 @@ static Value *promoteToVector(BinaryOperator *BO, IRBuilder<> &Builder,
     Mask[i] = (i + Rotation) % NumElts;
 
   Value *Shuffled = Builder.CreateShuffleVector(VResult, Mask);
-  unsigned ExtractLane = (RealLane + Rotation) % NumElts;
+  // Mask[i] = (i+Rot)%N  ⇒  element at source position j lands at
+  // result position (j − Rot + N) % N.
+  unsigned ExtractLane = (RealLane - Rotation + NumElts) % NumElts;
 
   // Optionally apply a second shuffle for extra confusion.
   if (RNG() % 2) {
@@ -95,7 +97,7 @@ static Value *promoteToVector(BinaryOperator *BO, IRBuilder<> &Builder,
     for (unsigned i = 0; i < NumElts; i++)
       Mask2[i] = (i + Rot2) % NumElts;
     Shuffled = Builder.CreateShuffleVector(Shuffled, Mask2);
-    ExtractLane = (ExtractLane + Rot2) % NumElts;
+    ExtractLane = (ExtractLane - Rot2 + NumElts) % NumElts;
   }
 
   return Builder.CreateExtractElement(Shuffled, Builder.getInt32(ExtractLane));
