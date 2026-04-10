@@ -87,6 +87,48 @@ jobs:
       - name: IR tests (FileCheck)
         run: ./tests/run_ir_tests.sh
 
+  windows-standalone:
+    name: Windows — standalone DLL + opt smoke
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install LLVM
+        uses: KyleMayes/install-llvm-action@v2
+        with:
+          version: "20.1.0"
+
+      - name: Configure
+        shell: pwsh
+        run: |
+          $llvmCmake = Join-Path $env:LLVM_PATH "lib\cmake\llvm"
+          cmake -B build-standalone -G "Visual Studio 17 2022" -A x64 `
+            -DLLVM_DIR="$llvmCmake" `
+            -DOBFUSCATOR_STANDALONE_MODULE=ON
+
+      - name: Build
+        run: cmake --build build-standalone --config Release
+
+      - name: Stage DLL for artifact
+        shell: pwsh
+        run: |
+          $dll = Get-ChildItem -Path build-standalone -Recurse -Filter obfuscator.dll | Select-Object -First 1
+          if (-not $dll) { throw "obfuscator.dll not found under build-standalone" }
+          Copy-Item $dll.FullName obfuscator-x86_64-pc-windows-msvc.dll
+
+      - name: Opt smoke test
+        shell: pwsh
+        run: |
+          $opt = Join-Path $env:LLVM_PATH "bin\opt.exe"
+          & $opt --load-pass-plugin="$(Resolve-Path obfuscator-x86_64-pc-windows-msvc.dll)" `
+            -passes=instsub -disable-output tests/ir/instsub_add.ll
+
+      - name: Upload standalone plugin (Windows x86_64 MSVC)
+        uses: actions/upload-artifact@v4
+        with:
+          name: obfuscator-standalone-x86_64-pc-windows-msvc
+          path: obfuscator-x86_64-pc-windows-msvc.dll
+
   lint:
     name: clang-tidy
     runs-on: ubuntu-24.04

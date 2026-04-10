@@ -20,11 +20,13 @@ ninja
 
 This produces `build/passes/obfuscator.so`, a loadable pass plugin for `opt` / `clang`.
 
-### Standalone module (Rust / rustc)
+### Standalone module (Rust)
 
-For a **standalone** `.so` that does not link `libLLVM` (for use with hosts that ship their own LLVM, such as `rustc`), enable `OBFUSCATOR_STANDALONE_MODULE`. See **[rust-integration/README.md](rust-integration/README.md)** for prerequisites, matching LLVM versions, and `cargo` usage.
+For a **standalone** `.so` that does not link `libLLVM` (for **`-Z llvm-plugins`** with `rustc`), add `-DOBFUSCATOR_STANDALONE_MODULE=ON` to the CMake line above. Prebuilt **`obfuscator-x86_64-unknown-linux-gnu.so`** is on **GitHub Releases**. See **[rust-integration/README.md](rust-integration/README.md)** and **[rust-integration/example-crate/](rust-integration/example-crate/)**.
 
-**Prebuilt Linux x86_64 plugin** assets are attached to **GitHub Releases** (`obfuscator-x86_64-unknown-linux-gnu.so`). A minimal template that uses them is **[rust-integration/example-crate/](rust-integration/example-crate/)**.
+Rust obfuscation needs **Linux x86_64 or WSL** and a **nightly whose LLVM matches** the plugin (LLVM 20 today). Stock **Windows rustup** usually cannot load the plugin; build obfuscated Rust from Linux/WSL.
+
+**Windows DLL for `opt`:** same CMake with MSVC, `-DOBFUSCATOR_STANDALONE_MODULE=ON`; output is `obfuscator.dll` under `passes/` (or `passes/Release/`). Example: `opt --load-pass-plugin=obfuscator.dll --passes=instsub -S in.ll -o out.ll`. Prebuilt **`obfuscator-x86_64-pc-windows-msvc.dll`** may be on Releases.
 
 ## Tests
 

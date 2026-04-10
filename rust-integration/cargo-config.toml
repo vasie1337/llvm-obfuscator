@@ -1,6 +1,11 @@
-# Copy this file to your Rust project as .cargo/config.toml
-# Prefer rust-integration/example-crate/ for a layout that uses GitHub Releases + vendor/obfuscator.so.
-# Then build with: cargo +nightly-2025-08-06 build --release
+# Copy to .cargo/config.toml and set the path to obfuscator.so
 
-[build]
-rustflags = ["-Z", "llvm-plugins=/absolute/path/to/llvm-obfuscator/build-rustc/passes/obfuscator.so"]
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-Z", "llvm-plugins=/absolute/path/to/obfuscator.so"]
+
+[target.x86_64-pc-windows-gnu]
+linker = "x86_64-w64-mingw32-gcc"
+rustflags = ["-Z", "llvm-plugins=/absolute/path/to/obfuscator.so"]
+
+[target.x86_64-pc-windows-msvc]
+rustflags = []

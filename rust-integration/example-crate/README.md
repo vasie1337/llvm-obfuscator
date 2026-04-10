@@ -1,59 +1,15 @@
-# Example Rust crate (llvm-obfuscator + prebuilt plugin)
+# Example crate
 
-This directory is a minimal template for building Rust with the obfuscator loaded via `-Z llvm-plugins`, using a **prebuilt** standalone `obfuscator.so` from this repository’s **GitHub Releases** (Linux x86_64, GNU). The release asset is named `obfuscator-x86_64-unknown-linux-gnu.so`.
-
-## Requirements
-
-- **Linux x86_64** (glibc). The published artifact is named `obfuscator-x86_64-unknown-linux-gnu.so`.
-- **Rust nightly** with **LLVM 20** — this repo pins `nightly-2025-08-06` in `rust-toolchain.toml` (see [../README.md](../README.md) for why).
-
-## One-time setup: download the plugin
-
-After the first **GitHub Release** in this repository (created by pushing a `v*` tag), `latest` works. Until then, use a **local standalone build** (see below) or a CI artifact.
-
-From this directory:
+Fetches a **Linux** standalone plugin into `vendor/obfuscator.so` and builds with **`rust-toolchain.toml`** (LLVM 20 nightly).
 
 ```bash
 chmod +x scripts/fetch-obfuscator-plugin.sh
 ./scripts/fetch-obfuscator-plugin.sh latest
-```
-
-Or pin a release tag:
-
-```bash
-./scripts/fetch-obfuscator-plugin.sh v0.1.0
-```
-
-The script writes `vendor/obfuscator.so`, which matches `.cargo/config.toml`.
-
-If you are not in a git clone of this repo, set the repository explicitly:
-
-```bash
-export GITHUB_REPOSITORY=your-org/llvm-obfuscator
-./scripts/fetch-obfuscator-plugin.sh latest
-```
-
-## Build
-
-```bash
 cargo build --release
 ```
 
-`rust-toolchain.toml` selects the pinned nightly; `cargo` does not need an explicit `+nightly-…` when run inside this crate.
+Optional: Windows **`.exe`** from Linux/WSL — `sudo apt install mingw-w64`, `rustup target add x86_64-pc-windows-gnu`, then `cargo build --release --target x86_64-pc-windows-gnu`.
 
-## Alternative: build the plugin locally
+Quick check: `strings target/release/obfuscator-example` should not show the hello string as plain ASCII if string encryption ran.
 
-If you do not use GitHub Releases, build the **standalone** module and copy it to `vendor/obfuscator.so`:
-
-```bash
-cd /path/to/llvm-obfuscator
-mkdir -p build-rustc && cd build-rustc
-cmake -G Ninja \
-  -DLLVM_DIR=/usr/lib/llvm-20/lib/cmake/llvm \
-  -DOBFUSCATOR_STANDALONE_MODULE=ON \
-  ..
-ninja
-cp passes/obfuscator.so /path/to/rust-integration/example-crate/vendor/obfuscator.so
-```
-
-Then run `cargo build --release` as above.
+See **[../README.md](../README.md)** to build the plugin locally instead of downloading.

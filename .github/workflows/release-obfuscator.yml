@@ -6,15 +6,15 @@ on:
       - "v*"
 
 permissions:
-  contents: write
+  contents: read
 
 env:
   LLVM_VERSION: "20"
   BUILD_DIR: build-standalone
 
 jobs:
-  release:
-    name: Linux x86_64 standalone .so + checksums
+  linux-release:
+    name: Linux x86_64 standalone .so
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -34,7 +34,7 @@ jobs:
             clang-${LLVM_VERSION} \
             ninja-build
 
-      - name: Configure (standalone module for rustc)
+      - name: Configure (standalone module)
         run: |
           cmake -B "$BUILD_DIR" -G Ninja \
             -DLLVM_DIR=/usr/lib/llvm-${LLVM_VERSION}/lib/cmake/llvm \
@@ -44,15 +44,80 @@ jobs:
       - name: Build
         run: cmake --build "$BUILD_DIR"
 
-      - name: Package
+      - name: Stage Linux asset
         run: |
           cp "${BUILD_DIR}/passes/obfuscator.so" obfuscator-x86_64-unknown-linux-gnu.so
-          sha256sum obfuscator-x86_64-unknown-linux-gnu.so > SHA256SUMS
+
+      - name: Upload Linux artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-linux-so
+          path: obfuscator-x86_64-unknown-linux-gnu.so
+
+  windows-release:
+    name: Windows x86_64 MSVC standalone .dll
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install LLVM
+        uses: KyleMayes/install-llvm-action@v2
+        with:
+          version: "20.1.0"
+
+      - name: Configure
+        shell: pwsh
+        run: |
+          $llvmCmake = Join-Path $env:LLVM_PATH "lib\cmake\llvm"
+          cmake -B build-standalone -G "Visual Studio 17 2022" -A x64 `
+            -DLLVM_DIR="$llvmCmake" `
+            -DOBFUSCATOR_STANDALONE_MODULE=ON
+
+      - name: Build
+        run: cmake --build build-standalone --config Release
+
+      - name: Stage Windows asset
+        shell: pwsh
+        run: |
+          $dll = Get-ChildItem -Path build-standalone -Recurse -Filter obfuscator.dll | Select-Object -First 1
+          if (-not $dll) { throw "obfuscator.dll not found under build-standalone" }
+          Copy-Item $dll.FullName obfuscator-x86_64-pc-windows-msvc.dll
+
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-windows-dll
+          path: obfuscator-x86_64-pc-windows-msvc.dll
+
+  publish:
+    name: Publish GitHub Release
+    needs: [linux-release, windows-release]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Download Linux artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release-linux-so
+          path: release-assets
+
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release-windows-dll
+          path: release-assets
+
+      - name: SHA256 checksums
+        run: |
+          cd release-assets
+          sha256sum obfuscator-x86_64-unknown-linux-gnu.so obfuscator-x86_64-pc-windows-msvc.dll > SHA256SUMS
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            obfuscator-x86_64-unknown-linux-gnu.so
-            SHA256SUMS
+            release-assets/obfuscator-x86_64-unknown-linux-gnu.so
+            release-assets/obfuscator-x86_64-pc-windows-msvc.dll
+            release-assets/SHA256SUMS
           generate_release_notes: true

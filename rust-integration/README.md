@@ -1,86 +1,16 @@
-# Using the obfuscator with Rust Projects
+# Rust (`-Z llvm-plugins`)
 
-## Prebuilt plugin (Linux x86_64)
+The pass must match **rustc’s bundled LLVM**. This repo targets **LLVM 20** (e.g. **`nightly-2025-08-06`** — check with `rustc -vV | grep LLVM`).
 
-GitHub Releases for this repository publish a **standalone** rustc-compatible plugin as `obfuscator-x86_64-unknown-linux-gnu.so` (plus `SHA256SUMS`), built with LLVM 20 to match the Rust nightly below.
+**Plugin:** download **`obfuscator-x86_64-unknown-linux-gnu.so`** from Releases, or build the repo with **`-DOBFUSCATOR_STANDALONE_MODULE=ON`** (see root [README.md](../README.md)).
 
-Use the **[example crate](example-crate/)** to download a release and run `cargo build` without building the plugin locally.
-
-## Prerequisites
-
-1. **Obtain the standalone pass** — either download a release asset (see [example-crate](example-crate/)) or **build** it (does not link libLLVM — uses the host's LLVM at runtime):
+**Build:**
 
 ```bash
-cd /path/to/llvm-obfuscator
-mkdir -p build-rustc && cd build-rustc
-cmake -G Ninja \
-    -DLLVM_DIR=/usr/lib/llvm-20/lib/cmake/llvm \
-    -DOBFUSCATOR_STANDALONE_MODULE=ON \
-    ..
-ninja
+RUSTFLAGS="-Z llvm-plugins=/absolute/path/to/obfuscator.so" \
+  cargo +nightly-2025-08-06 build --release
 ```
 
-This produces `build-rustc/passes/obfuscator.so`.
+Copy **[cargo-config.toml](cargo-config.toml)** to your project as `.cargo/config.toml` and set the path. A working layout is **[example-crate/](example-crate/)**.
 
-2. **Install a nightly toolchain with matching LLVM 20**:
-
-```bash
-rustup install nightly-2025-08-06
-```
-
-> **Why this specific nightly?** The pass is built against LLVM 20 headers.
-> `nightly-2025-08-06` is the latest nightly that ships LLVM 20.
-> Newer nightlies use LLVM 21+, which is ABI-incompatible.
-
-## Quick start
-
-```bash
-RUSTFLAGS="-Z llvm-plugins=/absolute/path/to/build-rustc/passes/obfuscator.so" \
-    cargo +nightly-2025-08-06 build --release
-```
-
-## Cargo config (recommended)
-
-Copy `cargo-config.toml` into your Rust project as `.cargo/config.toml`,
-then edit the path to `obfuscator.so`:
-
-```bash
-mkdir -p /path/to/your-rust-project/.cargo
-cp cargo-config.toml /path/to/your-rust-project/.cargo/config.toml
-# Edit the path in the file
-```
-
-Then build with:
-
-```bash
-cargo +nightly-2025-08-06 build --release
-```
-
-## What gets obfuscated
-
-All passes run automatically at optimization levels >= 1:
-
-- **InstructionSubstitution** — replaces arithmetic with equivalent but harder-to-read forms
-- **MBASubstitution** — mixed boolean-arithmetic substitution
-- **ControlFlowFlattening** — converts structured control flow into a switch-based dispatcher
-- **StringEncryption** — encrypts string literals, decrypted at runtime
-
-Only **your crate's code** is obfuscated. The Rust standard library is pre-compiled
-and not affected.
-
-## Matching LLVM versions
-
-The pass **must** be loaded into a rustc whose bundled LLVM matches the version
-the pass was compiled against. To check:
-
-```bash
-rustup run nightly-2025-08-06 rustc -vV | grep LLVM
-# Should show: LLVM version: 20.x.x
-```
-
-If you rebuild the pass against a different LLVM version, find the corresponding
-nightly with:
-
-```bash
-rustup run nightly-YYYY-MM-DD rustc -vV | grep LLVM
-```
+**Host:** Linux x86_64 or WSL. Cross-compiling to Windows from Linux uses the same **`obfuscator.so`** with `--target x86_64-pc-windows-gnu` (MinGW). Only **your crate** is obfuscated; `std` is prebuilt.
