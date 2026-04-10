@@ -1,0 +1,5 @@
+# Copy this file to your Rust project as .cargo/config.toml
+# Then build with: cargo +nightly-2025-08-06 build --release
+
+[build]
+rustflags = ["-Z", "llvm-plugins=/absolute/path/to/llvm-obfuscator/build-rustc/passes/Obfuscator.so"]
