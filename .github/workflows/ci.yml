@@ -50,11 +50,36 @@ jobs:
       - name: Build
         run: cmake --build "$BUILD_DIR"
 
+      - name: Build standalone plugin (rustc / -Z llvm-plugins)
+        run: |
+          cmake -B build-standalone -G Ninja \
+            -DLLVM_DIR=/usr/lib/llvm-${LLVM_VERSION}/lib/cmake/llvm \
+            -DOBFUSCATOR_STANDALONE_MODULE=ON \
+            -DCMAKE_BUILD_TYPE=Release
+          cmake --build build-standalone
+
       - name: Upload plugin (Linux)
         uses: actions/upload-artifact@v4
         with:
           name: obfuscator-linux
           path: ${{ env.BUILD_DIR }}/passes/obfuscator.so
+
+      - name: Upload standalone plugin (Linux x86_64, rustc)
+        uses: actions/upload-artifact@v4
+        with:
+          name: obfuscator-standalone-x86_64-unknown-linux-gnu
+          path: build-standalone/passes/obfuscator.so
+
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly-2025-08-06
+
+      - name: Verify Rust example crate (standalone plugin)
+        run: |
+          mkdir -p rust-integration/example-crate/vendor
+          cp build-standalone/passes/obfuscator.so rust-integration/example-crate/vendor/obfuscator.so
+          cd rust-integration/example-crate
+          cargo build --release
 
       - name: Behavioral tests
         run: ./tests/run_tests.sh

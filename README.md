@@ -24,6 +24,8 @@ This produces `build/passes/obfuscator.so`, a loadable pass plugin for `opt` / `
 
 For a **standalone** `.so` that does not link `libLLVM` (for use with hosts that ship their own LLVM, such as `rustc`), enable `OBFUSCATOR_STANDALONE_MODULE`. See **[rust-integration/README.md](rust-integration/README.md)** for prerequisites, matching LLVM versions, and `cargo` usage.
 
+**Prebuilt Linux x86_64 plugin** assets are attached to **GitHub Releases** (`obfuscator-x86_64-unknown-linux-gnu.so`). A minimal template that uses them is **[rust-integration/example-crate/](rust-integration/example-crate/)**.
+
 ## Tests
 
 From the repo root after building:

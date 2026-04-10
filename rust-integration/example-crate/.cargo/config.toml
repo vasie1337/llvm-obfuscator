@@ -1,0 +1,4 @@
+# Loads the LLVM pass plugin from vendor/ (see README and scripts/fetch-obfuscator-plugin.sh).
+# Path is relative to this crate directory when you run cargo here.
+[build]
+rustflags = ["-Z", "llvm-plugins=vendor/obfuscator.so"]

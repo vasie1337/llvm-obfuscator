@@ -1,4 +1,5 @@
 # Copy this file to your Rust project as .cargo/config.toml
+# Prefer rust-integration/example-crate/ for a layout that uses GitHub Releases + vendor/obfuscator.so.
 # Then build with: cargo +nightly-2025-08-06 build --release
 
 [build]

@@ -1,8 +1,14 @@
 # Using the obfuscator with Rust Projects
 
+## Prebuilt plugin (Linux x86_64)
+
+GitHub Releases for this repository publish a **standalone** rustc-compatible plugin as `obfuscator-x86_64-unknown-linux-gnu.so` (plus `SHA256SUMS`), built with LLVM 20 to match the Rust nightly below.
+
+Use the **[example crate](example-crate/)** to download a release and run `cargo build` without building the plugin locally.
+
 ## Prerequisites
 
-1. **Build the standalone pass** (does not link libLLVM — uses the host's LLVM at runtime):
+1. **Obtain the standalone pass** — either download a release asset (see [example-crate](example-crate/)) or **build** it (does not link libLLVM — uses the host's LLVM at runtime):
 
 ```bash
 cd /path/to/llvm-obfuscator

@@ -1,0 +1,58 @@
+name: Release obfuscator plugin
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+env:
+  LLVM_VERSION: "20"
+  BUILD_DIR: build-standalone
+
+jobs:
+  release:
+    name: Linux x86_64 standalone .so + checksums
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install LLVM ${{ env.LLVM_VERSION }}
+        run: |
+          set -eux
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ca-certificates curl gnupg
+          curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key \
+            | sudo gpg --dearmor -o /etc/apt/keyrings/llvm.gpg
+          echo "deb [signed-by=/etc/apt/keyrings/llvm.gpg] http://apt.llvm.org/noble/ llvm-toolchain-noble-${LLVM_VERSION} main" \
+            | sudo tee /etc/apt/sources.list.d/llvm.list
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            llvm-${LLVM_VERSION}-dev \
+            clang-${LLVM_VERSION} \
+            ninja-build
+
+      - name: Configure (standalone module for rustc)
+        run: |
+          cmake -B "$BUILD_DIR" -G Ninja \
+            -DLLVM_DIR=/usr/lib/llvm-${LLVM_VERSION}/lib/cmake/llvm \
+            -DOBFUSCATOR_STANDALONE_MODULE=ON \
+            -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build "$BUILD_DIR"
+
+      - name: Package
+        run: |
+          cp "${BUILD_DIR}/passes/obfuscator.so" obfuscator-x86_64-unknown-linux-gnu.so
+          sha256sum obfuscator-x86_64-unknown-linux-gnu.so > SHA256SUMS
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            obfuscator-x86_64-unknown-linux-gnu.so
+            SHA256SUMS
+          generate_release_notes: true
