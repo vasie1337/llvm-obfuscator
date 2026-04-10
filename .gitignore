@@ -1,0 +1,6 @@
+/build/
+/test-bins/bin/
+compile_commands.json
+*.o
+*.so
+.cache/
