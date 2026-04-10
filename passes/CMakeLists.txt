@@ -32,5 +32,21 @@ if(OBFUSCATOR_STANDALONE_MODULE)
             "LINKER:-undefined,dynamic_lookup")
     endif()
 else()
-    add_llvm_pass_plugin(obfuscator ${OBFUSCATOR_SOURCES})
+    if(WIN32)
+        add_library(obfuscator SHARED ${OBFUSCATOR_SOURCES})
+        target_include_directories(obfuscator PRIVATE ${LLVM_INCLUDE_DIRS})
+        target_compile_definitions(obfuscator PRIVATE ${LLVM_DEFINITIONS_LIST})
+        target_compile_features(obfuscator PRIVATE cxx_std_17)
+
+        # Link LLVM libs so all symbols resolve (SHARED requires this unlike MODULE)
+        llvm_map_components_to_libnames(LLVM_LIBS core support passes)
+        target_link_libraries(obfuscator PRIVATE ${LLVM_LIBS})
+
+        set_target_properties(obfuscator PROPERTIES
+            PREFIX ""
+            SUFFIX ".dll"
+        )
+    else()
+        add_llvm_pass_plugin(obfuscator ${OBFUSCATOR_SOURCES})
+    endif()
 endif()
