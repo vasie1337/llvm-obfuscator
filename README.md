@@ -3,7 +3,6 @@
 LLVM **New Pass Manager** plugin with obfuscation transforms (instruction substitution, MBA, bogus control flow, control-flow flattening, string encryption, and others). Built against **LLVM 20**.
 
 **IDA demo (Hex-Rays):** [clean](files/clean.md) · [obfuscated](files/obfuscated.md)  
-*(GitHub renders these; IDA HTML exports: [clean.html](files/clean.html), [ofuscated.html](files/ofuscated.html).)*
 
 ## Requirements
 
