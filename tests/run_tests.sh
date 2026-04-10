@@ -64,6 +64,96 @@ for src in "$TEST_SRC"/*.c; do
     compare_outputs "$name" "$TMPDIR/${name}_orig" "$TMPDIR/${name}_obfs"
 done
 
+# --- C tests: MBA substitution only (via opt) ---
+
+for src in "$TEST_SRC"/*.c; do
+    [ -f "$src" ] || continue
+    name="mbasub_$(basename "$src" .c)"
+    TOTAL=$((TOTAL + 1))
+
+    $CLANG -O0 -o "$TMPDIR/${name}_orig" "$src" 2>/dev/null
+    if ! $CLANG -O0 -emit-llvm -S "$src" -o "$TMPDIR/${name}.ll" 2>/dev/null; then
+        echo "FAIL: $name (emit IR failed)"
+        FAIL=$((FAIL + 1))
+        continue
+    fi
+
+    if ! $OPT --load-pass-plugin="$PASS_LIB" --passes="mbasub" \
+            -S "$TMPDIR/${name}.ll" -o "$TMPDIR/${name}_obfs.ll" 2>/dev/null; then
+        echo "FAIL: $name (opt mbasub pass failed)"
+        FAIL=$((FAIL + 1))
+        continue
+    fi
+
+    if ! $CLANG -O0 -x ir "$TMPDIR/${name}_obfs.ll" -o "$TMPDIR/${name}_obfs" 2>/dev/null; then
+        echo "FAIL: $name (clang compile obfuscated IR failed)"
+        FAIL=$((FAIL + 1))
+        continue
+    fi
+
+    compare_outputs "$name" "$TMPDIR/${name}_orig" "$TMPDIR/${name}_obfs"
+done
+
+# --- C tests: bogus control flow only (via opt) ---
+
+for src in "$TEST_SRC"/*.c; do
+    [ -f "$src" ] || continue
+    name="bcf_$(basename "$src" .c)"
+    TOTAL=$((TOTAL + 1))
+
+    $CLANG -O0 -o "$TMPDIR/${name}_orig" "$src" 2>/dev/null
+    if ! $CLANG -O0 -emit-llvm -S "$src" -o "$TMPDIR/${name}.ll" 2>/dev/null; then
+        echo "FAIL: $name (emit IR failed)"
+        FAIL=$((FAIL + 1))
+        continue
+    fi
+
+    if ! $OPT --load-pass-plugin="$PASS_LIB" --passes="bcf" \
+            -S "$TMPDIR/${name}.ll" -o "$TMPDIR/${name}_obfs.ll" 2>/dev/null; then
+        echo "FAIL: $name (opt bcf pass failed)"
+        FAIL=$((FAIL + 1))
+        continue
+    fi
+
+    if ! $CLANG -O0 -x ir "$TMPDIR/${name}_obfs.ll" -o "$TMPDIR/${name}_obfs" 2>/dev/null; then
+        echo "FAIL: $name (clang compile obfuscated IR failed)"
+        FAIL=$((FAIL + 1))
+        continue
+    fi
+
+    compare_outputs "$name" "$TMPDIR/${name}_orig" "$TMPDIR/${name}_obfs"
+done
+
+# --- C tests: control flow flattening only (via opt) ---
+
+for src in "$TEST_SRC"/*.c; do
+    [ -f "$src" ] || continue
+    name="cff_$(basename "$src" .c)"
+    TOTAL=$((TOTAL + 1))
+
+    $CLANG -O0 -o "$TMPDIR/${name}_orig" "$src" 2>/dev/null
+    if ! $CLANG -O0 -emit-llvm -S "$src" -o "$TMPDIR/${name}.ll" 2>/dev/null; then
+        echo "FAIL: $name (emit IR failed)"
+        FAIL=$((FAIL + 1))
+        continue
+    fi
+
+    if ! $OPT --load-pass-plugin="$PASS_LIB" --passes="cff" \
+            -S "$TMPDIR/${name}.ll" -o "$TMPDIR/${name}_obfs.ll" 2>/dev/null; then
+        echo "FAIL: $name (opt cff pass failed)"
+        FAIL=$((FAIL + 1))
+        continue
+    fi
+
+    if ! $CLANG -O0 -x ir "$TMPDIR/${name}_obfs.ll" -o "$TMPDIR/${name}_obfs" 2>/dev/null; then
+        echo "FAIL: $name (clang compile obfuscated IR failed)"
+        FAIL=$((FAIL + 1))
+        continue
+    fi
+
+    compare_outputs "$name" "$TMPDIR/${name}_orig" "$TMPDIR/${name}_obfs"
+done
+
 # --- Rust tests (no_std, IR pipeline through opt-20) ---
 #
 # Pipeline: rustc --emit=llvm-ir -> opt-20 (apply pass) -> clang-20 (link)

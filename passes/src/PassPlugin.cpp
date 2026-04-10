@@ -17,6 +17,18 @@ llvm::PassPluginLibraryInfo getObfuscatorPluginInfo() {
                     FPM.addPass(InstructionSubstitution());
                     return true;
                   }
+                  if (Name == "cff") {
+                    FPM.addPass(ControlFlowFlattening());
+                    return true;
+                  }
+                  if (Name == "mbasub") {
+                    FPM.addPass(MBASubstitution());
+                    return true;
+                  }
+                  if (Name == "bcf") {
+                    FPM.addPass(BogusControlFlow());
+                    return true;
+                  }
                   return false;
                 });
 
@@ -25,7 +37,16 @@ llvm::PassPluginLibraryInfo getObfuscatorPluginInfo() {
                 [](FunctionPassManager &FPM, OptimizationLevel Level) {
                   if (Level != OptimizationLevel::O0) {
                     FPM.addPass(InstructionSubstitution());
+                    FPM.addPass(MBASubstitution());
                   }
+                });
+
+            // CFF restructures the entire CFG, so run it once at the end
+            // of scalar optimizations rather than at every peephole point.
+            PB.registerScalarOptimizerLateEPCallback(
+                [](FunctionPassManager &FPM, OptimizationLevel Level) {
+                  if (Level != OptimizationLevel::O0)
+                    FPM.addPass(ControlFlowFlattening());
                 });
           }};
 }
