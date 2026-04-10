@@ -1,0 +1,93 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  LLVM_VERSION: "20"
+  BUILD_DIR: build
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install LLVM ${{ env.LLVM_VERSION }}
+        run: |
+          wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+          sudo add-apt-repository -y "deb http://apt.llvm.org/noble/ llvm-toolchain-noble-$LLVM_VERSION main"
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            llvm-${LLVM_VERSION}-dev \
+            clang-${LLVM_VERSION} \
+            llvm-${LLVM_VERSION}-tools \
+            ninja-build
+
+      - name: Configure
+        run: |
+          cmake -B $BUILD_DIR -G Ninja \
+            -DLLVM_DIR=/usr/lib/llvm-${LLVM_VERSION}/lib/cmake/llvm \
+            -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build $BUILD_DIR
+
+      - name: Behavioral tests
+        run: ./tests/run_tests.sh
+
+      - name: IR tests (FileCheck)
+        run: ./tests/run_ir_tests.sh
+
+  lint:
+    name: clang-tidy
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install LLVM ${{ env.LLVM_VERSION }} & clang-tidy
+        run: |
+          wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+          sudo add-apt-repository -y "deb http://apt.llvm.org/noble/ llvm-toolchain-noble-$LLVM_VERSION main"
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            llvm-${LLVM_VERSION}-dev \
+            clang-${LLVM_VERSION} \
+            clang-tidy-${LLVM_VERSION} \
+            ninja-build
+
+      - name: Configure (generate compile_commands.json)
+        run: |
+          cmake -B $BUILD_DIR -G Ninja \
+            -DLLVM_DIR=/usr/lib/llvm-${LLVM_VERSION}/lib/cmake/llvm \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+      - name: Run clang-tidy
+        run: |
+          clang-tidy-${LLVM_VERSION} \
+            -p $BUILD_DIR \
+            --warnings-as-errors='*' \
+            passes/src/*.cpp
+
+  format:
+    name: clang-format
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install clang-format
+        run: |
+          wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+          sudo add-apt-repository -y "deb http://apt.llvm.org/noble/ llvm-toolchain-noble-$LLVM_VERSION main"
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends clang-format-${LLVM_VERSION}
+
+      - name: Check formatting
+        run: |
+          find passes/src passes/include -name '*.cpp' -o -name '*.h' \
+            | xargs clang-format-${LLVM_VERSION} --dry-run --Werror

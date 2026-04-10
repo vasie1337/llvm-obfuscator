@@ -7,6 +7,8 @@ set(OBFUSCATOR_SOURCES
     src/ControlFlowFlattening.cpp
     src/BogusControlFlow.cpp
     src/StringEncryption.cpp
+    src/SIMDObfuscation.cpp
+    src/ConstantUnfolding.cpp
 )
 
 option(OBFUSCATOR_STANDALONE_MODULE
@@ -15,19 +17,19 @@ option(OBFUSCATOR_STANDALONE_MODULE
     OFF)
 
 if(OBFUSCATOR_STANDALONE_MODULE)
-    add_library(Obfuscator MODULE ${OBFUSCATOR_SOURCES})
-    target_include_directories(Obfuscator PRIVATE ${LLVM_INCLUDE_DIRS})
-    target_compile_definitions(Obfuscator PRIVATE ${LLVM_DEFINITIONS_LIST})
-    target_compile_features(Obfuscator PRIVATE cxx_std_17)
-    target_compile_options(Obfuscator PRIVATE -fno-rtti -fno-exceptions -fPIC)
-    set_target_properties(Obfuscator PROPERTIES PREFIX "" SUFFIX ".so")
+    add_library(obfuscator MODULE ${OBFUSCATOR_SOURCES})
+    target_include_directories(obfuscator PRIVATE ${LLVM_INCLUDE_DIRS})
+    target_compile_definitions(obfuscator PRIVATE ${LLVM_DEFINITIONS_LIST})
+    target_compile_features(obfuscator PRIVATE cxx_std_17)
+    target_compile_options(obfuscator PRIVATE -fno-rtti -fno-exceptions -fPIC)
+    set_target_properties(obfuscator PROPERTIES PREFIX "" SUFFIX ".so")
     if(UNIX AND NOT APPLE)
-        target_link_options(Obfuscator PRIVATE
+        target_link_options(obfuscator PRIVATE
             "LINKER:--unresolved-symbols=ignore-in-object-files")
     elseif(APPLE)
-        target_link_options(Obfuscator PRIVATE
+        target_link_options(obfuscator PRIVATE
             "LINKER:-undefined,dynamic_lookup")
     endif()
 else()
-    add_llvm_pass_plugin(Obfuscator ${OBFUSCATOR_SOURCES})
+    add_llvm_pass_plugin(obfuscator ${OBFUSCATOR_SOURCES})
 endif()

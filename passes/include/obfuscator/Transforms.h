@@ -31,4 +31,14 @@ struct StringEncryption : public llvm::PassInfoMixin<StringEncryption> {
                               llvm::ModuleAnalysisManager &AM);
 };
 
+struct SIMDObfuscation : public llvm::PassInfoMixin<SIMDObfuscation> {
+  llvm::PreservedAnalyses run(llvm::Function &F,
+                              llvm::FunctionAnalysisManager &AM);
+};
+
+struct ConstantUnfolding : public llvm::PassInfoMixin<ConstantUnfolding> {
+  llvm::PreservedAnalyses run(llvm::Function &F,
+                              llvm::FunctionAnalysisManager &AM);
+};
+
 } // namespace obfuscator

@@ -1,4 +1,4 @@
-# Using the Obfuscator with Rust Projects
+# Using the obfuscator with Rust Projects
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ cmake -G Ninja \
 ninja
 ```
 
-This produces `build-rustc/passes/Obfuscator.so`.
+This produces `build-rustc/passes/obfuscator.so`.
 
 2. **Install a nightly toolchain with matching LLVM 20**:
 
@@ -29,14 +29,14 @@ rustup install nightly-2025-08-06
 ## Quick start
 
 ```bash
-RUSTFLAGS="-Z llvm-plugins=/absolute/path/to/build-rustc/passes/Obfuscator.so" \
+RUSTFLAGS="-Z llvm-plugins=/absolute/path/to/build-rustc/passes/obfuscator.so" \
     cargo +nightly-2025-08-06 build --release
 ```
 
 ## Cargo config (recommended)
 
 Copy `cargo-config.toml` into your Rust project as `.cargo/config.toml`,
-then edit the path to `Obfuscator.so`:
+then edit the path to `obfuscator.so`:
 
 ```bash
 mkdir -p /path/to/your-rust-project/.cargo

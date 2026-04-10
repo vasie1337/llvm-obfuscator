@@ -12,7 +12,7 @@ set -euo pipefail
 #   ./scripts/obfuscate.sh test-bins/src/demo.c --target x86_64-w64-mingw32 -o demo.exe
 
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-PASS_LIB="$PROJECT_DIR/build/passes/Obfuscator.so"
+PASS_LIB="$PROJECT_DIR/build/passes/obfuscator.so"
 CLANG=clang-20
 OPT=opt-20
 LLC=llc-20
@@ -61,7 +61,7 @@ if [[ -z "$SOURCE" ]]; then
 fi
 
 if [[ ! -f "$PASS_LIB" ]]; then
-    echo "ERROR: Obfuscator.so not found. Run ./scripts/build.sh first." >&2
+    echo "ERROR: obfuscator.so not found. Run ./scripts/build.sh first." >&2
     exit 1
 fi
 

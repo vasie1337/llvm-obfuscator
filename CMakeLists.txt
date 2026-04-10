@@ -17,3 +17,11 @@ separate_arguments(LLVM_DEFINITIONS_LIST NATIVE_COMMAND ${LLVM_DEFINITIONS})
 add_definitions(${LLVM_DEFINITIONS_LIST})
 
 add_subdirectory(passes)
+
+enable_testing()
+add_test(NAME behavioral_tests
+    COMMAND ${CMAKE_SOURCE_DIR}/tests/run_tests.sh
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+add_test(NAME ir_tests
+    COMMAND ${CMAKE_SOURCE_DIR}/tests/run_ir_tests.sh
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})

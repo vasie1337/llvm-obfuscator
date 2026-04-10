@@ -10,7 +10,7 @@ set -euo pipefail
 #   ./scripts/build_pe.sh test-bins/src/demo.c -d test-bins/bin
 
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-PASS_LIB="$PROJECT_DIR/build/passes/Obfuscator.so"
+PASS_LIB="$PROJECT_DIR/build/passes/obfuscator.so"
 CLANG=clang-20
 OPT=opt-20
 LLC=llc-20
@@ -36,7 +36,7 @@ if [[ -z "$SOURCE" ]]; then
     echo "ERROR: no source file specified" >&2; exit 1
 fi
 if [[ ! -f "$PASS_LIB" ]]; then
-    echo "ERROR: Obfuscator.so not found. Run ./scripts/build.sh first." >&2; exit 1
+    echo "ERROR: obfuscator.so not found. Run ./scripts/build.sh first." >&2; exit 1
 fi
 if ! command -v "$MINGW_GCC" &>/dev/null; then
     echo "ERROR: $MINGW_GCC not found. Install mingw-w64." >&2; exit 1

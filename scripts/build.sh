@@ -15,4 +15,4 @@ cmake -G Ninja \
 ninja
 
 echo ""
-echo "Build complete: $BUILD_DIR/passes/Obfuscator.so"
+echo "Build complete: $BUILD_DIR/passes/obfuscator.so"

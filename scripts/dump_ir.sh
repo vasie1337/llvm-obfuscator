@@ -9,7 +9,7 @@ set -euo pipefail
 # Writes <basename>.ll (original) and <basename>_obfs.ll (obfuscated) to cwd.
 
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-PASS_LIB="$PROJECT_DIR/build/passes/Obfuscator.so"
+PASS_LIB="$PROJECT_DIR/build/passes/obfuscator.so"
 CLANG=clang-20
 OPT=opt-20
 
@@ -32,7 +32,7 @@ if [[ -z "$SOURCE" ]]; then
     echo "ERROR: no source file specified" >&2; exit 1
 fi
 if [[ ! -f "$PASS_LIB" ]]; then
-    echo "ERROR: Obfuscator.so not found. Run ./scripts/build.sh first." >&2; exit 1
+    echo "ERROR: obfuscator.so not found. Run ./scripts/build.sh first." >&2; exit 1
 fi
 
 BASENAME=$(basename "$SOURCE" .c)

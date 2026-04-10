@@ -7,7 +7,7 @@ using namespace llvm;
 using namespace obfuscator;
 
 llvm::PassPluginLibraryInfo getObfuscatorPluginInfo() {
-  return {LLVM_PLUGIN_API_VERSION, "Obfuscator", LLVM_VERSION_STRING,
+  return {LLVM_PLUGIN_API_VERSION, "obfuscator", LLVM_VERSION_STRING,
           [](PassBuilder &PB) {
             // Register function passes by name for: opt --passes="instsub"
             PB.registerPipelineParsingCallback(
@@ -27,6 +27,14 @@ llvm::PassPluginLibraryInfo getObfuscatorPluginInfo() {
                   }
                   if (Name == "bcf") {
                     FPM.addPass(BogusControlFlow());
+                    return true;
+                  }
+                  if (Name == "simd") {
+                    FPM.addPass(SIMDObfuscation());
+                    return true;
+                  }
+                  if (Name == "constunfold") {
+                    FPM.addPass(ConstantUnfolding());
                     return true;
                   }
                   return false;
@@ -54,10 +62,15 @@ llvm::PassPluginLibraryInfo getObfuscatorPluginInfo() {
 
             // CFF restructures the entire CFG, so run it once at the end
             // of scalar optimizations rather than at every peephole point.
+            // SIMD + constant-unfolding also run here so the vectorized /
+            // unfolded IR is not simplified away by later scalar opts.
             PB.registerScalarOptimizerLateEPCallback(
                 [](FunctionPassManager &FPM, OptimizationLevel Level) {
-                  if (Level != OptimizationLevel::O0)
+                  if (Level != OptimizationLevel::O0) {
                     FPM.addPass(ControlFlowFlattening());
+                    FPM.addPass(SIMDObfuscation());
+                    FPM.addPass(ConstantUnfolding());
+                  }
                 });
 
             // String encryption runs last so it sees the final set of
