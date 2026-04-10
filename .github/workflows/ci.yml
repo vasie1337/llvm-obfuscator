@@ -96,6 +96,10 @@ jobs:
         with:
           arch: x64
 
+      - name: List LLVM libs
+        shell: pwsh
+        run: Get-ChildItem "$env:LLVM_ROOT/lib/LLVM*" -ErrorAction SilentlyContinue
+  
       - name: Configure & build
         shell: pwsh
         run: |

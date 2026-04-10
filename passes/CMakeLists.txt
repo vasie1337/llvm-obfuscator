@@ -38,14 +38,17 @@ else()
         target_compile_definitions(obfuscator PRIVATE ${LLVM_DEFINITIONS_LIST})
         target_compile_features(obfuscator PRIVATE cxx_std_17)
 
-        # Link LLVM libs so all symbols resolve (SHARED requires this unlike MODULE)
-        llvm_map_components_to_libnames(LLVM_LIBS core support passes)
-        target_link_libraries(obfuscator PRIVATE ${LLVM_LIBS})
+        # Link against the monolithic shared libLLVM if available,
+        # avoiding hardcoded paths in static lib targets
+        set(LLVM_SHARED_LIB "${LLVM_LIBRARY_DIR}/LLVM-C.lib")
+        if(EXISTS "${LLVM_SHARED_LIB}")
+            target_link_libraries(obfuscator PRIVATE "${LLVM_SHARED_LIB}")
+        else()
+            # Fallback: link the single shared lib
+            target_link_libraries(obfuscator PRIVATE LLVM)
+        endif()
 
-        set_target_properties(obfuscator PROPERTIES
-            PREFIX ""
-            SUFFIX ".dll"
-        )
+        set_target_properties(obfuscator PROPERTIES PREFIX "" SUFFIX ".dll")
     else()
         add_llvm_pass_plugin(obfuscator ${OBFUSCATOR_SOURCES})
     endif()
