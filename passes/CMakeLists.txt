@@ -72,6 +72,12 @@ else()
 
         target_link_libraries(obfuscator PRIVATE ${_link_libs})
 
+        # Export the plugin entry point without using __declspec(dllexport) on
+        # llvmGetPassPluginInfo (that conflicts with PassPlugin.h's declaration).
+        if(MSVC)
+            target_link_options(obfuscator PRIVATE "/EXPORT:llvmGetPassPluginInfo")
+        endif()
+
         set_target_properties(obfuscator PROPERTIES PREFIX "" SUFFIX ".dll")
     else()
         add_llvm_pass_plugin(obfuscator ${OBFUSCATOR_SOURCES})

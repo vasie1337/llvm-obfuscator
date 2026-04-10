@@ -2,15 +2,6 @@
 
 #include "llvm/Passes/PassBuilder.h"
 #include "llvm/Passes/PassPlugin.h"
-#include "llvm/Support/Compiler.h"
-
-#if defined(_WIN32)
-// Clang loads this symbol with GetProcAddress; MSVC does not export it unless
-// marked, or the DLL fails with "Plugin entry point not found".
-#define OBFUSCATOR_PLUGIN_ABI __declspec(dllexport)
-#else
-#define OBFUSCATOR_PLUGIN_ABI LLVM_ATTRIBUTE_WEAK
-#endif
 
 using namespace llvm;
 using namespace obfuscator;
@@ -121,6 +112,6 @@ llvm::PassPluginLibraryInfo getObfuscatorPluginInfo() {
     };
 }
 
-extern "C" OBFUSCATOR_PLUGIN_ABI ::llvm::PassPluginLibraryInfo llvmGetPassPluginInfo() {
+extern "C" LLVM_ATTRIBUTE_WEAK ::llvm::PassPluginLibraryInfo llvmGetPassPluginInfo() {
     return getObfuscatorPluginInfo();
 }

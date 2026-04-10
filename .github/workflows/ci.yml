@@ -106,7 +106,6 @@ jobs:
           cmake -B $env:BUILD_DIR -G Ninja `
             -DCMAKE_BUILD_TYPE=Release `
             "-DLLVM_DIR=$env:LLVM_DIR" `
-            -DCMAKE_C_COMPILER=cl `
             -DCMAKE_CXX_COMPILER=cl
           cmake --build $env:BUILD_DIR
 
