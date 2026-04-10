@@ -1,12 +1,17 @@
-; PASS: function(instsub,mbasub,cff,bcf),strenc
-; All passes composed together on a non-trivial function with strings.
+; PASS: function(instsub,mbasub,simd,constunfold,cff,bcf),strenc
+; Same pipeline order as clang -fpass-plugin default late EP (PassPlugin.cpp).
 
+; Volatile const pool + SIMD + flattening + bogus branches + strings:
+; CHECK: @.constunfold_32
 ; Instruction substitution + MBA should eliminate plain add/sub:
 ; CHECK-NOT: add i32 %x, 1
 ; CHECK-NOT: sub i32 %x, 1
 
 ; CFF should insert a dispatcher:
 ; CHECK: cff.dispatch
+
+; SIMD obfuscation (i32 adds promoted to vector ops):
+; CHECK: insertelement <4 x i32>
 
 ; BCF should insert opaque predicate infrastructure:
 ; CHECK: @.bcf_opaque

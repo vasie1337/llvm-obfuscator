@@ -211,6 +211,42 @@ for src in "$TEST_SRC"/*.c; do
 done
 
 # ============================================================================
+# C tests: SIMD obfuscation only (via opt)
+# ============================================================================
+
+echo ""
+echo "=== C tests: simd (via opt) ==="
+
+for src in "$TEST_SRC"/*.c; do
+    [ -f "$src" ] || continue
+    run_c_opt_test "simd" "simd" "$src"
+done
+
+# ============================================================================
+# C tests: constant unfolding only (via opt)
+# ============================================================================
+
+echo ""
+echo "=== C tests: constunfold (via opt) ==="
+
+for src in "$TEST_SRC"/*.c; do
+    [ -f "$src" ] || continue
+    run_c_opt_test "constunfold" "constunfold" "$src"
+done
+
+# ============================================================================
+# C tests: basic-block fission only (via opt)
+# ============================================================================
+
+echo ""
+echo "=== C tests: bbfission (via opt) ==="
+
+for src in "$TEST_SRC"/*.c; do
+    [ -f "$src" ] || continue
+    run_c_opt_test "bbfission" "bbfission" "$src"
+done
+
+# ============================================================================
 # C tests: all passes combined (via opt)
 # ============================================================================
 
@@ -249,6 +285,21 @@ if [ -f "$MARKER_SRC" ]; then
         -S "$TMPDIR/marker.ll" -o "$TMPDIR/marker_strenc.ll" 2>/dev/null
     check_ir_marker "verify_strenc" "$TMPDIR/marker_strenc.ll" "__strenc_ctor" \
         "StringEncryption decryption constructor"
+
+    $OPT --load-pass-plugin="$PASS_LIB" --passes="constunfold" \
+        -S "$TMPDIR/marker.ll" -o "$TMPDIR/marker_constunfold.ll" 2>/dev/null
+    check_ir_marker "verify_constunfold" "$TMPDIR/marker_constunfold.ll" ".constunfold_32" \
+        "ConstantUnfolding volatile const pool"
+
+    $OPT --load-pass-plugin="$PASS_LIB" --passes="simd" \
+        -S "$TMPDIR/marker.ll" -o "$TMPDIR/marker_simd.ll" 2>/dev/null
+    check_ir_marker "verify_simd" "$TMPDIR/marker_simd.ll" "insertelement <4 x i32>" \
+        "SIMDObfuscation vector insert"
+
+    $OPT --load-pass-plugin="$PASS_LIB" --passes="bbfission" \
+        -S "$TMPDIR/marker.ll" -o "$TMPDIR/marker_bbfission.ll" 2>/dev/null
+    check_ir_marker "verify_bbfission" "$TMPDIR/marker_bbfission.ll" "bbf.frag" \
+        "BasicBlockFission fragment label"
 fi
 
 NOSTR_SRC="$TEST_SRC/edge_nostring.c"

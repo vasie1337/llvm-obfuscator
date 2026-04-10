@@ -32,6 +32,10 @@ PASS=0
 FAIL=0
 TOTAL=0
 
+TMP_OUT=$(mktemp)
+TMP_ERR=$(mktemp)
+trap 'rm -f "$TMP_OUT" "$TMP_ERR"' EXIT
+
 for ll in "$IR_DIR"/*.ll; do
     [ -f "$ll" ] || continue
     name=$(basename "$ll" .ll)
@@ -43,16 +47,24 @@ for ll in "$IR_DIR"/*.ll; do
         continue
     fi
 
-    if $OPT --load-pass-plugin="$PASS_LIB" --passes="$passes" \
-            -S "$ll" 2>/dev/null | $FILECHECK "$ll" 2>/dev/null; then
+    if ! $OPT --load-pass-plugin="$PASS_LIB" --passes="$passes" \
+            -S "$ll" -o "$TMP_OUT" 2>"$TMP_ERR"; then
+        echo "FAIL: $name (opt failed)"
+        sed 's/^/  opt: /' "$TMP_ERR" | head -20
+        FAIL=$((FAIL + 1))
+        continue
+    fi
+
+    if $FILECHECK "$ll" < "$TMP_OUT" 2>"$TMP_ERR"; then
         echo "PASS: $name"
         PASS=$((PASS + 1))
     else
-        echo "FAIL: $name"
+        echo "FAIL: $name (FileCheck)"
+        sed 's/^/  FileCheck: /' "$TMP_ERR" | head -25
         FAIL=$((FAIL + 1))
     fi
 done
 
 echo ""
 echo "IR test results: $PASS/$TOTAL passed, $FAIL failed"
-exit $FAIL
+if [ "$FAIL" -gt 0 ]; then exit 1; else exit 0; fi
