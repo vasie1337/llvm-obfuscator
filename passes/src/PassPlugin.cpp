@@ -60,16 +60,16 @@ llvm::PassPluginLibraryInfo getObfuscatorPluginInfo() {
                   }
                 });
 
-            // CFF restructures the entire CFG, so run it once at the end
-            // of scalar optimizations rather than at every peephole point.
-            // SIMD + constant-unfolding also run here so the vectorized /
-            // unfolded IR is not simplified away by later scalar opts.
+            // SIMD + constant-unfolding run before CFF so their new
+            // instructions are placed while the CFG is still normal.
+            // CFF restructures the entire CFG (dispatcher loop), so it
+            // must be the very last function-level transform.
             PB.registerScalarOptimizerLateEPCallback(
                 [](FunctionPassManager &FPM, OptimizationLevel Level) {
                   if (Level != OptimizationLevel::O0) {
-                    FPM.addPass(ControlFlowFlattening());
                     FPM.addPass(SIMDObfuscation());
                     FPM.addPass(ConstantUnfolding());
+                    FPM.addPass(ControlFlowFlattening());
                   }
                 });
 

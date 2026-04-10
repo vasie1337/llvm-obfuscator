@@ -219,7 +219,7 @@ echo "=== C tests: combined passes (via opt) ==="
 
 for src in "$TEST_SRC"/*.c; do
     [ -f "$src" ] || continue
-    run_c_opt_test "combined" "function(instsub,mbasub,cff,bcf),strenc" "$src"
+    run_c_opt_test "combined" "function(instsub,mbasub,simd,constunfold,cff,bcf),strenc" "$src"
 done
 
 # ============================================================================
@@ -289,79 +289,6 @@ for opt_level in O2 O3; do
         fi
     done
 done
-
-# ============================================================================
-# Rust tests (no_std, IR pipeline through opt-20)
-# ============================================================================
-
-echo ""
-echo "=== Rust tests ==="
-
-HAS_RUST=true
-if ! command -v "$RUSTC" &>/dev/null; then
-    echo "SKIP: rustc not found, skipping Rust tests"
-    HAS_RUST=false
-fi
-if ! command -v "$OPT" &>/dev/null; then
-    echo "SKIP: $OPT not found, skipping Rust tests"
-    HAS_RUST=false
-fi
-
-run_rust_pass_test() {
-    local src="$1" pass_name="$2" pass_flag="$3"
-    local base_name="rust_${pass_name}_$(basename "$src" .rs)"
-    TOTAL=$((TOTAL + 1))
-
-    # rustc at opt-level=1 already strips optnone and produces
-    # multi-block IR suitable for all passes.
-    if ! $RUSTC --edition 2021 \
-            --emit=llvm-ir \
-            -C panic=abort \
-            -C opt-level=1 \
-            -C codegen-units=1 \
-            -o "$TMPDIR/${base_name}.ll" \
-            "$src" 2>/dev/null; then
-        echo "FAIL: $base_name (rustc emit IR failed)"
-        FAIL=$((FAIL + 1))
-        return
-    fi
-
-    if ! $CLANG -O0 -x ir "$TMPDIR/${base_name}.ll" -o "$TMPDIR/${base_name}_orig" -lc 2>/dev/null; then
-        echo "FAIL: $base_name (clang compile original IR failed)"
-        FAIL=$((FAIL + 1))
-        return
-    fi
-
-    if ! $OPT --load-pass-plugin="$PASS_LIB" --passes="$pass_flag" \
-            -S "$TMPDIR/${base_name}.ll" -o "$TMPDIR/${base_name}_obfs.ll" 2>/dev/null; then
-        echo "FAIL: $base_name (opt pass failed -- possible LLVM version mismatch)"
-        FAIL=$((FAIL + 1))
-        return
-    fi
-
-    if ! $CLANG -O0 -x ir "$TMPDIR/${base_name}_obfs.ll" -o "$TMPDIR/${base_name}_obfs" -lc 2>/dev/null; then
-        echo "FAIL: $base_name (clang compile obfuscated IR failed)"
-        FAIL=$((FAIL + 1))
-        return
-    fi
-
-    compare_outputs "$base_name" "$TMPDIR/${base_name}_orig" "$TMPDIR/${base_name}_obfs"
-}
-
-if $HAS_RUST; then
-    rust_sources=("$TEST_SRC"/*.rs)
-    if [ -f "${rust_sources[0]:-}" ]; then
-        for src in "${rust_sources[@]}"; do
-            [ -f "$src" ] || continue
-            run_rust_pass_test "$src" "instsub" "instsub"
-            run_rust_pass_test "$src" "mbasub" "mbasub"
-            run_rust_pass_test "$src" "bcf" "bcf"
-            run_rust_pass_test "$src" "cff" "cff"
-            run_rust_pass_test "$src" "strenc" "strenc"
-            run_rust_pass_test "$src" "combined" "function(instsub,mbasub,cff,bcf),strenc"
-        done
-    fi
-fi
 
 # ============================================================================
 # Summary

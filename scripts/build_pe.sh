@@ -69,10 +69,13 @@ $CLANG -O0 -Xclang -disable-O0-optnone -emit-llvm -S \
     --target=$TRIPLE "$SOURCE" -o "$TMPDIR/input.ll"
 
 echo "Building variants:"
-build_variant "clean"  "none"
-build_variant "bcf"    "bcf"
-build_variant "strenc" "strenc"
-build_variant "obfs"   "function(instsub,mbasub,bcf),strenc"
+build_variant "clean"      "none"
+build_variant "bcf"        "bcf"
+build_variant "cff"        "cff"
+build_variant "simd"       "simd"
+build_variant "constunfold" "constunfold"
+build_variant "strenc"     "strenc"
+build_variant "obfs"       "function(instsub,mbasub,simd,constunfold,cff,bcf),strenc"
 
 echo ""
 echo "Done:"
