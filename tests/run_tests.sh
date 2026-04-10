@@ -6,6 +6,8 @@ PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 PASS_LIB="$PROJECT_DIR/build/passes/Obfuscator.so"
 TEST_SRC="$PROJECT_DIR/test-bins/src"
 CLANG=clang-20
+OPT=opt-20
+RUSTC=rustc
 TMPDIR=$(mktemp -d)
 trap "rm -rf $TMPDIR" EXIT
 
@@ -19,25 +21,13 @@ PASS=0
 FAIL=0
 TOTAL=0
 
-for src in "$TEST_SRC"/*.c; do
-    name=$(basename "$src" .c)
-    TOTAL=$((TOTAL + 1))
+compare_outputs() {
+    local name="$1" orig_bin="$2" obfs_bin="$3"
 
-    # Compile original (no obfuscation)
-    $CLANG -O0 -o "$TMPDIR/${name}_orig" "$src" 2>/dev/null
-
-    # Compile with obfuscation pass
-    if ! $CLANG -fpass-plugin="$PASS_LIB" -O1 -o "$TMPDIR/${name}_obfs" "$src" 2>/dev/null; then
-        echo "FAIL: $name (compilation with pass failed)"
-        FAIL=$((FAIL + 1))
-        continue
-    fi
-
-    # Run both and capture output + exit code
-    orig_out=$("$TMPDIR/${name}_orig" 2>&1) || true
+    orig_out=$("$orig_bin" 2>&1) || true
     orig_rc=${PIPESTATUS[0]:-$?}
 
-    obfs_out=$("$TMPDIR/${name}_obfs" 2>&1) || true
+    obfs_out=$("$obfs_bin" 2>&1) || true
     obfs_rc=${PIPESTATUS[0]:-$?}
 
     if [ "$orig_out" = "$obfs_out" ] && [ "$orig_rc" = "$obfs_rc" ]; then
@@ -54,7 +44,91 @@ for src in "$TEST_SRC"/*.c; do
         fi
         FAIL=$((FAIL + 1))
     fi
+}
+
+# --- C tests ---
+
+for src in "$TEST_SRC"/*.c; do
+    [ -f "$src" ] || continue
+    name=$(basename "$src" .c)
+    TOTAL=$((TOTAL + 1))
+
+    $CLANG -O0 -o "$TMPDIR/${name}_orig" "$src" 2>/dev/null
+
+    if ! $CLANG -fpass-plugin="$PASS_LIB" -O1 -o "$TMPDIR/${name}_obfs" "$src" 2>/dev/null; then
+        echo "FAIL: $name (compilation with pass failed)"
+        FAIL=$((FAIL + 1))
+        continue
+    fi
+
+    compare_outputs "$name" "$TMPDIR/${name}_orig" "$TMPDIR/${name}_obfs"
 done
+
+# --- Rust tests (no_std, IR pipeline through opt-20) ---
+#
+# Pipeline: rustc --emit=llvm-ir -> opt-20 (apply pass) -> clang-20 (link)
+# Uses no_std Rust sources with libc FFI so clang can link them without
+# the Rust runtime. LLVM IR text format is used for cross-version tolerance
+# (rustc's LLVM version may differ from the pass's LLVM 20).
+
+HAS_RUST=true
+if ! command -v "$RUSTC" &>/dev/null; then
+    echo "SKIP: rustc not found, skipping Rust tests"
+    HAS_RUST=false
+fi
+if ! command -v "$OPT" &>/dev/null; then
+    echo "SKIP: $OPT not found, skipping Rust tests"
+    HAS_RUST=false
+fi
+
+if $HAS_RUST; then
+    rust_sources=("$TEST_SRC"/*.rs)
+    if [ -f "${rust_sources[0]:-}" ]; then
+        for src in "${rust_sources[@]}"; do
+            [ -f "$src" ] || continue
+            name="rust_$(basename "$src" .rs)"
+            TOTAL=$((TOTAL + 1))
+
+            # Emit LLVM IR from rustc (no_std, single codegen unit for one .ll file).
+            # opt-level=1 eliminates unreachable panic paths (overflow/div-by-zero
+            # checks on constants) that would otherwise need Rust runtime symbols.
+            if ! $RUSTC --edition 2021 \
+                    --emit=llvm-ir \
+                    -C panic=abort \
+                    -C opt-level=1 \
+                    -C codegen-units=1 \
+                    -o "$TMPDIR/${name}.ll" \
+                    "$src" 2>/dev/null; then
+                echo "FAIL: $name (rustc emit IR failed)"
+                FAIL=$((FAIL + 1))
+                continue
+            fi
+
+            # Original: compile IR directly with clang
+            if ! $CLANG -O0 -x ir "$TMPDIR/${name}.ll" -o "$TMPDIR/${name}_orig" -lc 2>/dev/null; then
+                echo "FAIL: $name (clang compile original IR failed)"
+                FAIL=$((FAIL + 1))
+                continue
+            fi
+
+            # Obfuscated: run pass via opt-20, then compile with clang
+            if ! $OPT --load-pass-plugin="$PASS_LIB" --passes="instsub" \
+                    -S "$TMPDIR/${name}.ll" -o "$TMPDIR/${name}_obfs.ll" 2>/dev/null; then
+                echo "FAIL: $name (opt-20 pass failed -- possible LLVM version mismatch)"
+                FAIL=$((FAIL + 1))
+                continue
+            fi
+
+            if ! $CLANG -O0 -x ir "$TMPDIR/${name}_obfs.ll" -o "$TMPDIR/${name}_obfs" -lc 2>/dev/null; then
+                echo "FAIL: $name (clang compile obfuscated IR failed)"
+                FAIL=$((FAIL + 1))
+                continue
+            fi
+
+            compare_outputs "$name" "$TMPDIR/${name}_orig" "$TMPDIR/${name}_obfs"
+        done
+    fi
+fi
 
 echo ""
 echo "Results: $PASS/$TOTAL passed, $FAIL failed"
