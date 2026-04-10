@@ -38,15 +38,37 @@ else()
         target_compile_definitions(obfuscator PRIVATE ${LLVM_DEFINITIONS_LIST})
         target_compile_features(obfuscator PRIVATE cxx_std_17)
 
-        # Link against the monolithic shared libLLVM if available,
-        # avoiding hardcoded paths in static lib targets
-        set(LLVM_SHARED_LIB "${LLVM_LIBRARY_DIR}/LLVM-C.lib")
-        if(EXISTS "${LLVM_SHARED_LIB}")
-            target_link_libraries(obfuscator PRIVATE "${LLVM_SHARED_LIB}")
-        else()
-            # Fallback: link the single shared lib
-            target_link_libraries(obfuscator PRIVATE LLVM)
+        # Link needed LLVM static libs directly to avoid imported targets
+        # that hardcode wrong VS paths for diaguids.lib
+        set(_llvm_libs
+            LLVMCore LLVMSupport LLVMPasses LLVMAnalysis LLVMTransformUtils
+            LLVMScalarOpts LLVMipo LLVMInstCombine LLVMAggressiveInstCombine
+            LLVMVectorize LLVMTarget LLVMLinker LLVMBinaryFormat
+            LLVMBitReader LLVMBitWriter LLVMMC LLVMMCParser LLVMObject
+            LLVMProfileData LLVMRemarks LLVMCodeGen LLVMCodeGenTypes
+            LLVMIRReader LLVMAsmParser LLVMIRPrinter LLVMDemangle
+            LLVMTargetParser LLVMDebugInfoCodeView LLVMDebugInfoDWARF
+            LLVMDebugInfoMSF LLVMDebugInfoPDB LLVMTextAPI
+            LLVMCoroutines LLVMCFGuard LLVMExtensions LLVMOption
+            LLVMFrontendOpenMP LLVMFrontendOffloading LLVMFrontendDriver
+            LLVMFrontendHLSL LLVMFrontendAtomic LLVMHipStdPar
+            LLVMObjCARCOpts LLVMInstrumentation LLVMWindowsManifest
+            LLVMWindowsDriver LLVMSandboxIR LLVMTelemetry
+            LLVMSelectionDAG LLVMGlobalISel LLVMAsmPrinter
+            LLVMBitstreamReader LLVMCGData
+        )
+        set(_link_libs "")
+        foreach(_lib ${_llvm_libs})
+            list(APPEND _link_libs "${LLVM_LIBRARY_DIR}/${_lib}.lib")
+        endforeach()
+
+        # Add the VS2022 diaguids.lib (LLVM's PDB support needs it)
+        set(_dia_lib "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/DIA SDK/lib/amd64/diaguids.lib")
+        if(EXISTS "${_dia_lib}")
+            list(APPEND _link_libs "${_dia_lib}")
         endif()
+
+        target_link_libraries(obfuscator PRIVATE ${_link_libs})
 
         set_target_properties(obfuscator PROPERTIES PREFIX "" SUFFIX ".dll")
     else()
