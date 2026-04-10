@@ -1,6 +1,10 @@
 # Example crate
 
-Fetches a **Linux** standalone plugin into `vendor/obfuscator.so` and builds with **`rust-toolchain.toml`** (LLVM 20 nightly).
+Uses a **Linux** standalone plugin at `vendor/obfuscator.so` and **`rust-toolchain.toml`** (LLVM 20 nightly).
+
+**Easiest:** from the repo root, run **`bash rust-integration/setup.sh`** (Linux/WSL) or **`.\rust-integration\setup.ps1`** (Windows — then build from WSL/Linux). That downloads the plugin and matches `.cargo/config.toml`.
+
+Manual fetch:
 
 ```bash
 chmod +x scripts/fetch-obfuscator-plugin.sh
