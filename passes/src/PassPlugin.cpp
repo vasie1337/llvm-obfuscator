@@ -2,6 +2,7 @@
 
 #include "llvm/Passes/PassBuilder.h"
 #include "llvm/Passes/PassPlugin.h"
+#include "llvm/Support/Compiler.h"
 
 using namespace llvm;
 using namespace obfuscator;
@@ -112,6 +113,14 @@ llvm::PassPluginLibraryInfo getObfuscatorPluginInfo() {
     };
 }
 
-extern "C" LLVM_ATTRIBUTE_WEAK ::llvm::PassPluginLibraryInfo llvmGetPassPluginInfo() {
+// On MSVC, LLVM_ATTRIBUTE_WEAK is empty, so the entry point is not exported from the DLL and
+// opt/clang cannot resolve llvmGetPassPluginInfo (legacy-plugin error).
+#if defined(_MSC_VER)
+#define LLVM_OBFUSCATOR_PLUGIN_ABI __declspec(dllexport)
+#else
+#define LLVM_OBFUSCATOR_PLUGIN_ABI LLVM_ATTRIBUTE_WEAK
+#endif
+
+extern "C" LLVM_OBFUSCATOR_PLUGIN_ABI ::llvm::PassPluginLibraryInfo llvmGetPassPluginInfo() {
     return getObfuscatorPluginInfo();
 }
