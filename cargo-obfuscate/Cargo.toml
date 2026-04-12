@@ -1,0 +1,11 @@
+[package]
+name = "cargo-obfuscate"
+version = "0.1.0"
+edition = "2021"
+description = "Cargo subcommand that transparently obfuscates Rust builds via the llvm-obfuscator plugin"
+repository = "https://github.com/vasie1337/llvm-obfuscator"
+license = "MIT"
+
+[[bin]]
+name = "cargo-obfuscate"
+path = "src/main.rs"

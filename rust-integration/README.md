@@ -2,9 +2,38 @@
 
 The pass must match **rustc’s bundled LLVM**. This repo targets **LLVM 20** (e.g. **`nightly-2025-08-06`** — check with `rustc -vV | grep LLVM`).
 
-**Plugin:** download **`obfuscator-x86_64-unknown-linux-gnu.so`** from Releases, or build the repo with **`-DOBFUSCATOR_STANDALONE_MODULE=ON`** (see root [README.md](../README.md)).
+---
 
-## Quick install (example crate)
+## `cargo obfuscate` — zero config, any project
+
+Install the subcommand once:
+
+```bash
+cargo install --git https://github.com/vasie1337/llvm-obfuscator cargo-obfuscate
+```
+
+Then in **any** Rust project, replace `cargo build` with:
+
+```bash
+cargo obfuscate build --release
+# cross-compile to Windows from Linux/WSL:
+cargo obfuscate build --target x86_64-pc-windows-gnu --release
+```
+
+That’s it — no `rust-toolchain.toml`, no `.cargo/config.toml`, no manual plugin download.
+
+On first run `cargo-obfuscate`:
+1. Installs `nightly-2025-08-06` via rustup (if not already present)
+2. Downloads the plugin from GitHub Releases into `~/.cargo/obfuscate-plugin/` (cached for all future runs)
+3. Passes `-Z llvm-plugins=<cached-path>` to rustc automatically
+
+**Native Windows:** stock Windows rustup often cannot load LLVM plugins — prefer WSL2 or Linux.
+
+---
+
+## Manual setup (example crate)
+
+**Plugin:** download **`obfuscator-x86_64-unknown-linux-gnu.so`** from Releases, or build the repo with **`-DOBFUSCATOR_STANDALONE_MODULE=ON`** (see root [README.md](../README.md)).
 
 From the **repository root**:
 
@@ -23,8 +52,6 @@ cargo build --release
 `rust-toolchain.toml` pins the nightly; **rustup** installs it on the first `cargo` invocation.
 
 **Cross-compiling** to Windows from Linux/WSL uses the same **`obfuscator.so`** with `--target x86_64-pc-windows-gnu` (MinGW). Only **your crate** is obfuscated; `std` is prebuilt.
-
-**Native Windows `rustc`:** stock Windows rustup often **cannot** load LLVM plugins; prefer **WSL2** or Linux for Rust obfuscation. For **`opt` / clang** on Windows, build or download **`obfuscator-x86_64-pc-windows-msvc.dll`** (see root README), or run `.\rust-integration\setup.ps1 -OptDll` to fetch it beside the `.so`.
 
 ---
 
