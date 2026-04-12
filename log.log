@@ -1,0 +1,1182 @@
+2026-04-12T16:23:49.3573696Z Current runner version: '2.333.1'
+2026-04-12T16:23:49.3607546Z ##[group]Runner Image Provisioner
+2026-04-12T16:23:49.3608924Z Hosted Compute Agent
+2026-04-12T16:23:49.3609599Z Version: 20260213.493
+2026-04-12T16:23:49.3610443Z Commit: 5c115507f6dd24b8de37d8bbe0bb4509d0cc0fa3
+2026-04-12T16:23:49.3611383Z Build Date: 2026-02-13T00:28:41Z
+2026-04-12T16:23:49.3612248Z Worker ID: {5ca03bb3-2f41-4164-a561-7f979e731f63}
+2026-04-12T16:23:49.3613197Z Azure Region: westcentralus
+2026-04-12T16:23:49.3613999Z ##[endgroup]
+2026-04-12T16:23:49.3615671Z ##[group]Operating System
+2026-04-12T16:23:49.3616503Z Microsoft Windows Server 2025
+2026-04-12T16:23:49.3617251Z 10.0.26100
+2026-04-12T16:23:49.3617798Z Datacenter
+2026-04-12T16:23:49.3618440Z ##[endgroup]
+2026-04-12T16:23:49.3619008Z ##[group]Runner Image
+2026-04-12T16:23:49.3619709Z Image: windows-2025
+2026-04-12T16:23:49.3620311Z Version: 20260405.77.1
+2026-04-12T16:23:49.3622197Z Included Software: https://github.com/actions/runner-images/blob/win25/20260405.77/images/windows/Windows2025-Readme.md
+2026-04-12T16:23:49.3624348Z Image Release: https://github.com/actions/runner-images/releases/tag/win25%2F20260405.77
+2026-04-12T16:23:49.3625679Z ##[endgroup]
+2026-04-12T16:23:49.3627038Z ##[group]GITHUB_TOKEN Permissions
+2026-04-12T16:23:49.3629619Z Contents: read
+2026-04-12T16:23:49.3630332Z Metadata: read
+2026-04-12T16:23:49.3630978Z ##[endgroup]
+2026-04-12T16:23:49.3633508Z Secret source: Actions
+2026-04-12T16:23:49.3634406Z Prepare workflow directory
+2026-04-12T16:23:49.4129091Z Prepare all required actions
+2026-04-12T16:23:49.4181320Z Getting action download info
+2026-04-12T16:23:49.7852104Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-04-12T16:23:49.9046564Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-04-12T16:23:50.3064714Z Complete job name: Windows x86_64 MSVC standalone .dll
+2026-04-12T16:23:50.4826390Z ##[group]Run actions/checkout@v4
+2026-04-12T16:23:50.4827614Z with:
+2026-04-12T16:23:50.4828017Z   repository: vasie1337/llvm-obfuscator
+2026-04-12T16:23:50.4828784Z   token: ***
+2026-04-12T16:23:50.4829597Z   ssh-strict: true
+2026-04-12T16:23:50.4829990Z   ssh-user: git
+2026-04-12T16:23:50.4830389Z   persist-credentials: true
+2026-04-12T16:23:50.4830830Z   clean: true
+2026-04-12T16:23:50.4831249Z   sparse-checkout-cone-mode: true
+2026-04-12T16:23:50.4831723Z   fetch-depth: 1
+2026-04-12T16:23:50.4832115Z   fetch-tags: false
+2026-04-12T16:23:50.4832525Z   show-progress: true
+2026-04-12T16:23:50.4832935Z   lfs: false
+2026-04-12T16:23:50.4833286Z   submodules: false
+2026-04-12T16:23:50.4833682Z   set-safe-directory: true
+2026-04-12T16:23:50.4834373Z env:
+2026-04-12T16:23:50.4834712Z   LLVM_VERSION: 20
+2026-04-12T16:23:50.4835126Z   BUILD_DIR: build-standalone
+2026-04-12T16:23:50.4835589Z   LLVM_MSVC_TARBALL_VER: 20.1.0
+2026-04-12T16:23:50.4836041Z ##[endgroup]
+2026-04-12T16:23:50.6687427Z Syncing repository: vasie1337/llvm-obfuscator
+2026-04-12T16:23:50.6689216Z ##[group]Getting Git version info
+2026-04-12T16:23:50.6690114Z Working directory is 'D:\a\llvm-obfuscator\llvm-obfuscator'
+2026-04-12T16:23:50.7373295Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-04-12T16:23:51.5381871Z git version 2.53.0.windows.2
+2026-04-12T16:23:51.5436502Z ##[endgroup]
+2026-04-12T16:23:51.5458768Z Temporarily overriding HOME='D:\a\_temp\a26841bd-6a77-461f-9f6d-a6dc67acd4b0' before making global git config changes
+2026-04-12T16:23:51.5461965Z Adding repository directory to the temporary git global config as a safe directory
+2026-04-12T16:23:51.5472469Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\llvm-obfuscator\llvm-obfuscator
+2026-04-12T16:23:51.6432661Z Deleting the contents of 'D:\a\llvm-obfuscator\llvm-obfuscator'
+2026-04-12T16:23:51.6440104Z ##[group]Initializing the repository
+2026-04-12T16:23:51.6449992Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\llvm-obfuscator\llvm-obfuscator
+2026-04-12T16:23:51.8259402Z Initialized empty Git repository in D:/a/llvm-obfuscator/llvm-obfuscator/.git/
+2026-04-12T16:23:51.8310312Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/vasie1337/llvm-obfuscator
+2026-04-12T16:23:51.9441189Z ##[endgroup]
+2026-04-12T16:23:51.9441939Z ##[group]Disabling automatic garbage collection
+2026-04-12T16:23:51.9453259Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2026-04-12T16:23:51.9867152Z ##[endgroup]
+2026-04-12T16:23:51.9870923Z ##[group]Setting up auth
+2026-04-12T16:23:51.9884923Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-04-12T16:23:52.0260090Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-04-12T16:23:54.5136700Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-04-12T16:23:54.5561452Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-04-12T16:23:55.0984008Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-04-12T16:23:55.1282265Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-04-12T16:23:55.6523343Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2026-04-12T16:23:55.6837369Z ##[endgroup]
+2026-04-12T16:23:55.6850972Z ##[group]Fetching the repository
+2026-04-12T16:23:55.6854103Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +58622695d4aade26c268117ceb65d79d48798006:refs/tags/v1.2.0
+2026-04-12T16:23:57.4735950Z From https://github.com/vasie1337/llvm-obfuscator
+2026-04-12T16:23:57.4736462Z  * [new ref]         58622695d4aade26c268117ceb65d79d48798006 -> v1.2.0
+2026-04-12T16:23:57.5210762Z ##[endgroup]
+2026-04-12T16:23:57.5211200Z ##[group]Determining the checkout info
+2026-04-12T16:23:57.5213921Z ##[endgroup]
+2026-04-12T16:23:57.5225047Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2026-04-12T16:23:57.5552456Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2026-04-12T16:23:57.5848337Z ##[group]Checking out the ref
+2026-04-12T16:23:57.5859573Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/tags/v1.2.0
+2026-04-12T16:23:57.7153834Z Note: switching to 'refs/tags/v1.2.0'.
+2026-04-12T16:23:57.7154486Z
+2026-04-12T16:23:57.7154796Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-04-12T16:23:57.7155422Z changes and commit them, and you can discard any commits you make in this
+2026-04-12T16:23:57.7156061Z state without impacting any branches by switching back to a branch.
+2026-04-12T16:23:57.7156420Z
+2026-04-12T16:23:57.7156663Z If you want to create a new branch to retain commits you create, you may
+2026-04-12T16:23:57.7157272Z do so (now or later) by using -c with the switch command. Example:
+2026-04-12T16:23:57.7157594Z
+2026-04-12T16:23:57.7157730Z   git switch -c <new-branch-name>
+2026-04-12T16:23:57.7157944Z
+2026-04-12T16:23:57.7158057Z Or undo this operation with:
+2026-04-12T16:23:57.7158284Z
+2026-04-12T16:23:57.7158403Z   git switch -
+2026-04-12T16:23:57.7158553Z
+2026-04-12T16:23:57.7158878Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-04-12T16:23:57.7159327Z
+2026-04-12T16:23:57.7159592Z HEAD is now at 5862269 feat: add command to add obfuscation with zero config
+2026-04-12T16:23:57.7225504Z ##[endgroup]
+2026-04-12T16:23:57.7557171Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2026-04-12T16:23:57.7819617Z 58622695d4aade26c268117ceb65d79d48798006
+2026-04-12T16:23:57.8175867Z ##[group]Run $v = $env:LLVM_MSVC_TARBALL_VER
+2026-04-12T16:23:57.8176295Z [36;1m$v = $env:LLVM_MSVC_TARBALL_VER[0m
+2026-04-12T16:23:57.8176942Z [36;1m$url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-${v}/clang+llvm-${v}-x86_64-pc-windows-msvc.tar.xz"[0m
+2026-04-12T16:23:57.8177591Z [36;1m$xz = Join-Path $env:RUNNER_TEMP "clang+llvm-msvc.tar.xz"[0m
+2026-04-12T16:23:57.8177953Z [36;1mInvoke-WebRequest -Uri $url -OutFile $xz[0m
+2026-04-12T16:23:57.8178228Z [36;1mtar -xf $xz -C $env:RUNNER_TEMP[0m
+2026-04-12T16:23:57.8178819Z [36;1m$root = Get-ChildItem $env:RUNNER_TEMP -Directory | Where-Object { $_.Name -like "clang+llvm-*-x86_64-pc-windows-msvc" } | Select-Object -First 1[0m
+2026-04-12T16:23:57.8180052Z [36;1mif (-not $root) { throw "Could not find extracted clang+llvm-*-pc-windows-msvc directory under RUNNER_TEMP" }[0m
+2026-04-12T16:23:57.8180554Z [36;1m$llvmPath = $root.FullName[0m
+2026-04-12T16:23:57.8180984Z [36;1m"LLVM_PATH=$llvmPath" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8[0m
+2026-04-12T16:23:57.8181511Z [36;1mJoin-Path $llvmPath "bin" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8[0m
+2026-04-12T16:23:57.8366911Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-04-12T16:23:57.8367255Z env:
+2026-04-12T16:23:57.8367411Z   LLVM_VERSION: 20
+2026-04-12T16:23:57.8367601Z   BUILD_DIR: build-standalone
+2026-04-12T16:23:57.8367814Z   LLVM_MSVC_TARBALL_VER: 20.1.0
+2026-04-12T16:23:57.8368014Z ##[endgroup]
+2026-04-12T16:25:19.0150021Z ##[group]Run $llvmCmake = Join-Path $env:LLVM_PATH "lib\cmake\llvm"
+2026-04-12T16:25:19.0150559Z [36;1m$llvmCmake = Join-Path $env:LLVM_PATH "lib\cmake\llvm"[0m
+2026-04-12T16:25:19.0150976Z [36;1mif (-not (Test-Path (Join-Path $llvmCmake "LLVMConfig.cmake"))) {[0m
+2026-04-12T16:25:19.0151467Z [36;1m  throw "LLVMConfig.cmake not found at $llvmCmake (broken LLVM layout?)"[0m
+2026-04-12T16:25:19.0151805Z [36;1m}[0m
+2026-04-12T16:25:19.0152073Z [36;1mcmake -B build-standalone -G "Visual Studio 17 2022" -A x64 `[0m
+2026-04-12T16:25:19.0152399Z [36;1m  -DLLVM_DIR="$llvmCmake" `[0m
+2026-04-12T16:25:19.0152662Z [36;1m  -DOBFUSCATOR_STANDALONE_MODULE=ON[0m
+2026-04-12T16:25:19.0212510Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-04-12T16:25:19.0212847Z env:
+2026-04-12T16:25:19.0213018Z   LLVM_VERSION: 20
+2026-04-12T16:25:19.0213209Z   BUILD_DIR: build-standalone
+2026-04-12T16:25:19.0213436Z   LLVM_MSVC_TARBALL_VER: 20.1.0
+2026-04-12T16:25:19.0213773Z   LLVM_PATH: D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc
+2026-04-12T16:25:19.0214091Z ##[endgroup]
+2026-04-12T16:25:34.2532622Z -- The CXX compiler identification is MSVC 19.44.35225.0
+2026-04-12T16:25:34.4846447Z -- Detecting CXX compiler ABI info
+2026-04-12T16:25:35.9773190Z -- Detecting CXX compiler ABI info - done
+2026-04-12T16:25:36.0016645Z -- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped
+2026-04-12T16:25:36.0100572Z -- Detecting CXX compile features
+2026-04-12T16:25:36.0121489Z -- Detecting CXX compile features - done
+2026-04-12T16:25:38.3348106Z -- Could NOT find LibXml2 (missing: LIBXML2_LIBRARY LIBXML2_INCLUDE_DIR)
+2026-04-12T16:25:38.3576673Z -- Found LLVM 20.1.0
+2026-04-12T16:25:38.3579865Z -- Using LLVMConfig.cmake in: D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\lib\cmake\llvm
+2026-04-12T16:25:38.3839940Z -- Configuring done (17.6s)
+2026-04-12T16:25:38.4369597Z -- Generating done (0.1s)
+2026-04-12T16:25:38.4378519Z -- Build files have been written to: D:/a/llvm-obfuscator/llvm-obfuscator/build-standalone
+2026-04-12T16:25:38.5226083Z ##[group]Run cmake --build build-standalone --config Release
+2026-04-12T16:25:38.5227746Z [36;1mcmake --build build-standalone --config Release[0m
+2026-04-12T16:25:38.5285078Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-04-12T16:25:38.5285401Z env:
+2026-04-12T16:25:38.5285575Z   LLVM_VERSION: 20
+2026-04-12T16:25:38.5285765Z   BUILD_DIR: build-standalone
+2026-04-12T16:25:38.5285996Z   LLVM_MSVC_TARBALL_VER: 20.1.0
+2026-04-12T16:25:38.5286288Z   LLVM_PATH: D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc
+2026-04-12T16:25:38.5286576Z ##[endgroup]
+2026-04-12T16:25:38.9698862Z MSBuild version 17.14.40+3e7442088 for .NET Framework
+2026-04-12T16:25:39.0056020Z
+2026-04-12T16:25:39.3707840Z   1>Checking Build System
+2026-04-12T16:25:39.5044712Z   Building Custom Rule D:/a/llvm-obfuscator/llvm-obfuscator/passes/CMakeLists.txt
+2026-04-12T16:25:39.6799473Z cl : command line  warning D9025: overriding '/EHs' with '/EHs-' [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:39.6801045Z cl : command line  warning D9025: overriding '/EHc' with '/EHc-' [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:39.6801773Z   PassPlugin.cpp
+2026-04-12T16:25:45.4484907Z   InstructionSubstitution.cpp
+2026-04-12T16:25:45.6442485Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(77,7): warning C4624: 'llvm::OverflowingBinaryOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6459114Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6459639Z
+2026-04-12T16:25:45.6461160Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(155,7): warning C4624: 'llvm::PossiblyExactOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6462917Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6463407Z
+2026-04-12T16:25:45.6464831Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(205,7): warning C4624: 'llvm::FPMathOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6466486Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6466933Z
+2026-04-12T16:25:45.6803929Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6812953Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6813754Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:45.6814542Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:45.6815317Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(405,12):
+2026-04-12T16:25:45.6817127Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>' being compiled
+2026-04-12T16:25:45.6818027Z
+2026-04-12T16:25:45.6819833Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(404,7): warning C4624: 'llvm::AddOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6821529Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6821997Z
+2026-04-12T16:25:45.6827324Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6829604Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6830339Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:45.6831077Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:45.6831831Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(408,12):
+2026-04-12T16:25:45.6832967Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>' being compiled
+2026-04-12T16:25:45.6833816Z
+2026-04-12T16:25:45.6835243Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(407,7): warning C4624: 'llvm::SubOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6836867Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6837341Z
+2026-04-12T16:25:45.6838998Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6840933Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6841651Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:45.6842397Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:45.6843220Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(411,12):
+2026-04-12T16:25:45.6844455Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>' being compiled
+2026-04-12T16:25:45.6845698Z
+2026-04-12T16:25:45.6847069Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(410,7): warning C4624: 'llvm::MulOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6848704Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6849146Z
+2026-04-12T16:25:45.6850747Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6852635Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6853351Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:45.6854103Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:45.6854842Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(414,12):
+2026-04-12T16:25:45.6855968Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>' being compiled
+2026-04-12T16:25:45.6856825Z
+2026-04-12T16:25:45.6858176Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(413,7): warning C4624: 'llvm::ShlOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6859779Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6860238Z
+2026-04-12T16:25:45.6862696Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6865690Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6866421Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:45.6867177Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:45.6867904Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(418,12):
+2026-04-12T16:25:45.6869015Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>' being compiled
+2026-04-12T16:25:45.6869840Z
+2026-04-12T16:25:45.6871312Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(417,7): warning C4624: 'llvm::AShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6872924Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6873365Z
+2026-04-12T16:25:45.6875031Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6876897Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6877603Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:45.6878349Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:45.6879077Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(421,12):
+2026-04-12T16:25:45.6880173Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>' being compiled
+2026-04-12T16:25:45.6881016Z
+2026-04-12T16:25:45.6882405Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(420,7): warning C4624: 'llvm::LShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6885898Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6886754Z
+2026-04-12T16:25:45.6887982Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,34>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6889053Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6889513Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:45.6889985Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:45.6890441Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(425,14):
+2026-04-12T16:25:45.6891048Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,34>' being compiled
+2026-04-12T16:25:45.6891485Z
+2026-04-12T16:25:45.6892458Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(424,7): warning C4624: 'llvm::GEPOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6893444Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6893726Z
+2026-04-12T16:25:45.6895301Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,47>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6896733Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6897282Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:45.6897723Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:45.6898150Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(566,14):
+2026-04-12T16:25:45.6898729Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,47>' being compiled
+2026-04-12T16:25:45.6899155Z
+2026-04-12T16:25:45.6899983Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(565,7): warning C4624: 'llvm::PtrToIntOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6900937Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6901202Z
+2026-04-12T16:25:45.6902033Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,49>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6902991Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6903429Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:45.6903858Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:45.6904291Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(603,14):
+2026-04-12T16:25:45.6904869Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,49>' being compiled
+2026-04-12T16:25:45.6905291Z
+2026-04-12T16:25:45.6906132Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(602,7): warning C4624: 'llvm::BitCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6907142Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6907421Z
+2026-04-12T16:25:45.6908269Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,50>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6909223Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6909634Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:45.6910071Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:45.6910512Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(627,14):
+2026-04-12T16:25:45.6911099Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,50>' being compiled
+2026-04-12T16:25:45.6911513Z
+2026-04-12T16:25:45.6912329Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(626,7): warning C4624: 'llvm::AddrSpaceCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6913260Z   (compiling source file '../../passes/src/PassPlugin.cpp')
+2026-04-12T16:25:45.6913533Z
+2026-04-12T16:25:45.6934482Z D:\a\llvm-obfuscator\llvm-obfuscator\passes\src\PassPlugin.cpp(124,69): error C2375: 'llvmGetPassPluginInfo': redefinition; different linkage [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:45.6936867Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\Passes\PassPlugin.h(111,1):
+2026-04-12T16:25:45.6937627Z       see declaration of 'llvmGetPassPluginInfo'
+2026-04-12T16:25:45.6938152Z
+2026-04-12T16:25:46.3861251Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(77,7): warning C4624: 'llvm::OverflowingBinaryOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3863168Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3863735Z
+2026-04-12T16:25:46.3876383Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(155,7): warning C4624: 'llvm::PossiblyExactOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3877503Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3877853Z
+2026-04-12T16:25:46.3889337Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(205,7): warning C4624: 'llvm::FPMathOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3891174Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3891728Z
+2026-04-12T16:25:46.3911519Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3913293Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3913926Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:46.3914688Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:46.3915347Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(405,12):
+2026-04-12T16:25:46.3916202Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>' being compiled
+2026-04-12T16:25:46.3916921Z
+2026-04-12T16:25:46.3918347Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(404,7): warning C4624: 'llvm::AddOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3920052Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3920601Z
+2026-04-12T16:25:46.3922227Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3924217Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3925004Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:46.3925746Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:46.3926509Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(408,12):
+2026-04-12T16:25:46.3928018Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>' being compiled
+2026-04-12T16:25:46.3928675Z
+2026-04-12T16:25:46.3930051Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(407,7): warning C4624: 'llvm::SubOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3932689Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3933056Z
+2026-04-12T16:25:46.3934152Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3935485Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3936285Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:46.3936999Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:46.3937724Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(411,12):
+2026-04-12T16:25:46.3938869Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>' being compiled
+2026-04-12T16:25:46.3939730Z
+2026-04-12T16:25:46.3941113Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(410,7): warning C4624: 'llvm::MulOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3942944Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3943478Z
+2026-04-12T16:25:46.3945115Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3947067Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3948242Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:46.3949010Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:46.3949748Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(414,12):
+2026-04-12T16:25:46.3950891Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>' being compiled
+2026-04-12T16:25:46.3951753Z
+2026-04-12T16:25:46.3953125Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(413,7): warning C4624: 'llvm::ShlOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3954891Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3955417Z
+2026-04-12T16:25:46.3957014Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3958890Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3959673Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:46.3960417Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:46.3961175Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(418,12):
+2026-04-12T16:25:46.3962290Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>' being compiled
+2026-04-12T16:25:46.3963084Z
+2026-04-12T16:25:46.3964729Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(417,7): warning C4624: 'llvm::AShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3966491Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3968545Z
+2026-04-12T16:25:46.3970176Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3972074Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3972874Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:46.3973616Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:46.3974354Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(421,12):
+2026-04-12T16:25:46.3975464Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>' being compiled
+2026-04-12T16:25:46.3976292Z
+2026-04-12T16:25:46.3977666Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(420,7): warning C4624: 'llvm::LShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3979376Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3979903Z
+2026-04-12T16:25:46.3981467Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,34>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3983324Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3984129Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:46.3984907Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:46.3985637Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(425,14):
+2026-04-12T16:25:46.3986650Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,34>' being compiled
+2026-04-12T16:25:46.3987378Z
+2026-04-12T16:25:46.3989044Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(424,7): warning C4624: 'llvm::GEPOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3990221Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3990736Z
+2026-04-12T16:25:46.3992017Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,47>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.3993793Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.3994576Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:46.3995320Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:46.3996072Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(566,14):
+2026-04-12T16:25:46.3997130Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,47>' being compiled
+2026-04-12T16:25:46.3997858Z
+2026-04-12T16:25:46.3999296Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(565,7): warning C4624: 'llvm::PtrToIntOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.4001305Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.4001964Z
+2026-04-12T16:25:46.4005179Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,49>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.4007331Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.4008192Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:46.4008707Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:46.4009159Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(603,14):
+2026-04-12T16:25:46.4009799Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,49>' being compiled
+2026-04-12T16:25:46.4010246Z
+2026-04-12T16:25:46.4011238Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(602,7): warning C4624: 'llvm::BitCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.4012235Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.4012548Z
+2026-04-12T16:25:46.4019337Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,50>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.4020499Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.4021029Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:46.4021497Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:46.4021940Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(627,14):
+2026-04-12T16:25:46.4022704Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,50>' being compiled
+2026-04-12T16:25:46.4023150Z
+2026-04-12T16:25:46.4023999Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(626,7): warning C4624: 'llvm::AddrSpaceCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:46.4025576Z   (compiling source file '../../passes/src/InstructionSubstitution.cpp')
+2026-04-12T16:25:46.4025895Z
+2026-04-12T16:25:46.9942202Z   MBASubstitution.cpp
+2026-04-12T16:25:47.9165193Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(77,7): warning C4624: 'llvm::OverflowingBinaryOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9167099Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9167624Z
+2026-04-12T16:25:47.9180355Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(155,7): warning C4624: 'llvm::PossiblyExactOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9181455Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9193638Z
+2026-04-12T16:25:47.9194791Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(205,7): warning C4624: 'llvm::FPMathOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9196606Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9196934Z
+2026-04-12T16:25:47.9215968Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9218296Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9219579Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:47.9220557Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:47.9222178Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(405,12):
+2026-04-12T16:25:47.9224248Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>' being compiled
+2026-04-12T16:25:47.9225649Z
+2026-04-12T16:25:47.9228139Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(404,7): warning C4624: 'llvm::AddOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9229829Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9231482Z
+2026-04-12T16:25:47.9233525Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9235717Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9236352Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:47.9236801Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:47.9237248Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(408,12):
+2026-04-12T16:25:47.9237923Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>' being compiled
+2026-04-12T16:25:47.9238412Z
+2026-04-12T16:25:47.9239588Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(407,7): warning C4624: 'llvm::SubOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9241494Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9241867Z
+2026-04-12T16:25:47.9242903Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9244027Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9244479Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:47.9244921Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:47.9245362Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(411,12):
+2026-04-12T16:25:47.9246017Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>' being compiled
+2026-04-12T16:25:47.9246501Z
+2026-04-12T16:25:47.9247293Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(410,7): warning C4624: 'llvm::MulOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9249067Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9249390Z
+2026-04-12T16:25:47.9250726Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9252847Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9253602Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:47.9254372Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:47.9255124Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(414,12):
+2026-04-12T16:25:47.9256322Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>' being compiled
+2026-04-12T16:25:47.9257203Z
+2026-04-12T16:25:47.9258615Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(413,7): warning C4624: 'llvm::ShlOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9260642Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9261130Z
+2026-04-12T16:25:47.9262763Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9264647Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9265385Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:47.9266145Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:47.9266903Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(418,12):
+2026-04-12T16:25:47.9268034Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>' being compiled
+2026-04-12T16:25:47.9268879Z
+2026-04-12T16:25:47.9270115Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(417,7): warning C4624: 'llvm::AShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9271733Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9272202Z
+2026-04-12T16:25:47.9273775Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9275496Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9276186Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:47.9278516Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:47.9279762Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(421,12):
+2026-04-12T16:25:47.9280880Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>' being compiled
+2026-04-12T16:25:47.9281620Z
+2026-04-12T16:25:47.9282892Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(420,7): warning C4624: 'llvm::LShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9284149Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9284464Z
+2026-04-12T16:25:47.9285489Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,34>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9288183Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9288679Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:47.9289144Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:47.9289606Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(425,14):
+2026-04-12T16:25:47.9290636Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,34>' being compiled
+2026-04-12T16:25:47.9291591Z
+2026-04-12T16:25:47.9293088Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(424,7): warning C4624: 'llvm::GEPOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9294271Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9294571Z
+2026-04-12T16:25:47.9295483Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,47>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9296550Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9297006Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:47.9297810Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:47.9298254Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(566,14):
+2026-04-12T16:25:47.9298853Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,47>' being compiled
+2026-04-12T16:25:47.9299288Z
+2026-04-12T16:25:47.9300734Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(565,7): warning C4624: 'llvm::PtrToIntOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9302790Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9303296Z
+2026-04-12T16:25:47.9305769Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,49>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9307325Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9307792Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:47.9308261Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:47.9308699Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(603,14):
+2026-04-12T16:25:47.9309305Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,49>' being compiled
+2026-04-12T16:25:47.9309746Z
+2026-04-12T16:25:47.9310554Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(602,7): warning C4624: 'llvm::BitCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9311548Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9311845Z
+2026-04-12T16:25:47.9318226Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,50>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9319978Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9320463Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:47.9320920Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:47.9321359Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(627,14):
+2026-04-12T16:25:47.9321951Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,50>' being compiled
+2026-04-12T16:25:47.9322389Z
+2026-04-12T16:25:47.9323235Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(626,7): warning C4624: 'llvm::AddrSpaceCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:47.9324257Z   (compiling source file '../../passes/src/MBASubstitution.cpp')
+2026-04-12T16:25:47.9324558Z
+2026-04-12T16:25:48.7563569Z   ControlFlowFlattening.cpp
+2026-04-12T16:25:49.6740476Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(77,7): warning C4624: 'llvm::OverflowingBinaryOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6741633Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6741965Z
+2026-04-12T16:25:49.6754381Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(155,7): warning C4624: 'llvm::PossiblyExactOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6755433Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6755780Z
+2026-04-12T16:25:49.6767961Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(205,7): warning C4624: 'llvm::FPMathOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6769770Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6770312Z
+2026-04-12T16:25:49.6815316Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6817472Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6818927Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:49.6820443Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:49.6825557Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(405,12):
+2026-04-12T16:25:49.6827255Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>' being compiled
+2026-04-12T16:25:49.6828904Z
+2026-04-12T16:25:49.6830426Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(404,7): warning C4624: 'llvm::AddOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6832188Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6832843Z
+2026-04-12T16:25:49.6835740Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6837642Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6838153Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:49.6838626Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:49.6839065Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(408,12):
+2026-04-12T16:25:49.6839751Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>' being compiled
+2026-04-12T16:25:49.6840254Z
+2026-04-12T16:25:49.6841097Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(407,7): warning C4624: 'llvm::SubOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6842067Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6842377Z
+2026-04-12T16:25:49.6843294Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6844368Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6844808Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:49.6845257Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:49.6845686Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(411,12):
+2026-04-12T16:25:49.6846340Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>' being compiled
+2026-04-12T16:25:49.6846840Z
+2026-04-12T16:25:49.6847606Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(410,7): warning C4624: 'llvm::MulOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6848608Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6848916Z
+2026-04-12T16:25:49.6849921Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6851013Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6851449Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:49.6851888Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:49.6852311Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(414,12):
+2026-04-12T16:25:49.6852969Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>' being compiled
+2026-04-12T16:25:49.6853823Z
+2026-04-12T16:25:49.6854589Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(413,7): warning C4624: 'llvm::ShlOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6855520Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6855811Z
+2026-04-12T16:25:49.6856839Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6857996Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6858457Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:49.6858908Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:49.6859340Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(418,12):
+2026-04-12T16:25:49.6859992Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>' being compiled
+2026-04-12T16:25:49.6860487Z
+2026-04-12T16:25:49.6861283Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(417,7): warning C4624: 'llvm::AShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6862291Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6862605Z
+2026-04-12T16:25:49.6863522Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6864595Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6865036Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:49.6865485Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:49.6865927Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(421,12):
+2026-04-12T16:25:49.6866554Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>' being compiled
+2026-04-12T16:25:49.6867032Z
+2026-04-12T16:25:49.6867806Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(420,7): warning C4624: 'llvm::LShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6868738Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6869042Z
+2026-04-12T16:25:49.6869865Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,34>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6870857Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6871293Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:49.6871723Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:49.6872146Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(425,14):
+2026-04-12T16:25:49.6872714Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,34>' being compiled
+2026-04-12T16:25:49.6873141Z
+2026-04-12T16:25:49.6874341Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(424,7): warning C4624: 'llvm::GEPOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6875902Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6876286Z
+2026-04-12T16:25:49.6878259Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,47>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6881358Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6882163Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:49.6882951Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:49.6883719Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(566,14):
+2026-04-12T16:25:49.6884737Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,47>' being compiled
+2026-04-12T16:25:49.6885489Z
+2026-04-12T16:25:49.6886935Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(565,7): warning C4624: 'llvm::PtrToIntOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6888700Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6889233Z
+2026-04-12T16:25:49.6890746Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,49>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6892719Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6893519Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:49.6904083Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:49.6904868Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(603,14):
+2026-04-12T16:25:49.6910596Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,49>' being compiled
+2026-04-12T16:25:49.6914253Z
+2026-04-12T16:25:49.6918296Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(602,7): warning C4624: 'llvm::BitCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6920084Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6920627Z
+2026-04-12T16:25:49.6923548Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,50>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6925410Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6926239Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:49.6927023Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:49.6927795Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(627,14):
+2026-04-12T16:25:49.6928833Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,50>' being compiled
+2026-04-12T16:25:49.6929593Z
+2026-04-12T16:25:49.6931089Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(626,7): warning C4624: 'llvm::AddrSpaceCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:49.6932846Z   (compiling source file '../../passes/src/ControlFlowFlattening.cpp')
+2026-04-12T16:25:49.6933645Z
+2026-04-12T16:25:50.9700077Z   BogusControlFlow.cpp
+2026-04-12T16:25:52.0084339Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(77,7): warning C4624: 'llvm::OverflowingBinaryOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0085746Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0086061Z
+2026-04-12T16:25:52.0103712Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(155,7): warning C4624: 'llvm::PossiblyExactOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0105245Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0105556Z
+2026-04-12T16:25:52.0119660Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(205,7): warning C4624: 'llvm::FPMathOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0121421Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0121867Z
+2026-04-12T16:25:52.0141282Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0143033Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0143579Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:52.0144042Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:52.0144728Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(405,12):
+2026-04-12T16:25:52.0145901Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>' being compiled
+2026-04-12T16:25:52.0146608Z
+2026-04-12T16:25:52.0147801Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(404,7): warning C4624: 'llvm::AddOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0149465Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0149861Z
+2026-04-12T16:25:52.0151261Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0153626Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0154408Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:52.0155145Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:52.0155891Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(408,12):
+2026-04-12T16:25:52.0157023Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>' being compiled
+2026-04-12T16:25:52.0157857Z
+2026-04-12T16:25:52.0159631Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(407,7): warning C4624: 'llvm::SubOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0161548Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0162037Z
+2026-04-12T16:25:52.0163972Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0166038Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0166811Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:52.0167557Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:52.0168294Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(411,12):
+2026-04-12T16:25:52.0169441Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>' being compiled
+2026-04-12T16:25:52.0170292Z
+2026-04-12T16:25:52.0171693Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(410,7): warning C4624: 'llvm::MulOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0173404Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0173902Z
+2026-04-12T16:25:52.0175575Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0177472Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0178222Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:52.0179003Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:52.0179753Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(414,12):
+2026-04-12T16:25:52.0181363Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>' being compiled
+2026-04-12T16:25:52.0182245Z
+2026-04-12T16:25:52.0183604Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(413,7): warning C4624: 'llvm::ShlOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0185240Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0185718Z
+2026-04-12T16:25:52.0187319Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0189210Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0189932Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:52.0190670Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:52.0191395Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(418,12):
+2026-04-12T16:25:52.0192467Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>' being compiled
+2026-04-12T16:25:52.0193293Z
+2026-04-12T16:25:52.0194653Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(417,7): warning C4624: 'llvm::AShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0196286Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0196745Z
+2026-04-12T16:25:52.0200077Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0202191Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0202956Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:52.0203727Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:52.0204456Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(421,12):
+2026-04-12T16:25:52.0205550Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>' being compiled
+2026-04-12T16:25:52.0206370Z
+2026-04-12T16:25:52.0207782Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(420,7): warning C4624: 'llvm::LShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0209488Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0209975Z
+2026-04-12T16:25:52.0211467Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,34>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0213266Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0213993Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:52.0214743Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:52.0215464Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(425,14):
+2026-04-12T16:25:52.0216471Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,34>' being compiled
+2026-04-12T16:25:52.0217473Z
+2026-04-12T16:25:52.0232263Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(424,7): warning C4624: 'llvm::GEPOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0234054Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0234562Z
+2026-04-12T16:25:52.0236752Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,47>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0242343Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0243097Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:52.0243874Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:52.0244618Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(566,14):
+2026-04-12T16:25:52.0249005Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,47>' being compiled
+2026-04-12T16:25:52.0249774Z
+2026-04-12T16:25:52.0251174Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(565,7): warning C4624: 'llvm::PtrToIntOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0254044Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0254621Z
+2026-04-12T16:25:52.0256521Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,49>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0258476Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0259539Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:52.0260306Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:52.0261084Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(603,14):
+2026-04-12T16:25:52.0262126Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,49>' being compiled
+2026-04-12T16:25:52.0262896Z
+2026-04-12T16:25:52.0264300Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(602,7): warning C4624: 'llvm::BitCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0266019Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0266528Z
+2026-04-12T16:25:52.0271305Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,50>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0273294Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0274207Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:52.0275061Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:52.0275911Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(627,14):
+2026-04-12T16:25:52.0277029Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,50>' being compiled
+2026-04-12T16:25:52.0278229Z
+2026-04-12T16:25:52.0279821Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(626,7): warning C4624: 'llvm::AddrSpaceCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:52.0281689Z   (compiling source file '../../passes/src/BogusControlFlow.cpp')
+2026-04-12T16:25:52.0282255Z
+2026-04-12T16:25:53.1745352Z   StringEncryption.cpp
+2026-04-12T16:25:54.0691556Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(77,7): warning C4624: 'llvm::OverflowingBinaryOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0693458Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0693982Z
+2026-04-12T16:25:54.0707572Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(155,7): warning C4624: 'llvm::PossiblyExactOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0708693Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0709015Z
+2026-04-12T16:25:54.0720833Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(205,7): warning C4624: 'llvm::FPMathOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0722603Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0723115Z
+2026-04-12T16:25:54.0741125Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0744155Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0745336Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:54.0746045Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:54.0746771Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(405,12):
+2026-04-12T16:25:54.0747918Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>' being compiled
+2026-04-12T16:25:54.0748770Z
+2026-04-12T16:25:54.0750163Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(404,7): warning C4624: 'llvm::AddOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0751851Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0752195Z
+2026-04-12T16:25:54.0753652Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0755548Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0756343Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:54.0758321Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:54.0759367Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(408,12):
+2026-04-12T16:25:54.0761009Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>' being compiled
+2026-04-12T16:25:54.0762088Z
+2026-04-12T16:25:54.0763096Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(407,7): warning C4624: 'llvm::SubOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0764135Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0764436Z
+2026-04-12T16:25:54.0765391Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0767615Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0768520Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:54.0769270Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:54.0769727Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(411,12):
+2026-04-12T16:25:54.0770409Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>' being compiled
+2026-04-12T16:25:54.0770895Z
+2026-04-12T16:25:54.0771697Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(410,7): warning C4624: 'llvm::MulOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0772649Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0772935Z
+2026-04-12T16:25:54.0774137Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0775374Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0775973Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:54.0776593Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:54.0777023Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(414,12):
+2026-04-12T16:25:54.0777681Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>' being compiled
+2026-04-12T16:25:54.0778171Z
+2026-04-12T16:25:54.0778949Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(413,7): warning C4624: 'llvm::ShlOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0779881Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0780166Z
+2026-04-12T16:25:54.0781054Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0782094Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0782514Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:54.0782952Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:54.0783385Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(418,12):
+2026-04-12T16:25:54.0784027Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>' being compiled
+2026-04-12T16:25:54.0784499Z
+2026-04-12T16:25:54.0785291Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(417,7): warning C4624: 'llvm::AShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0786220Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0786504Z
+2026-04-12T16:25:54.0787389Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0788418Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0788834Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:54.0789272Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:54.0789693Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(421,12):
+2026-04-12T16:25:54.0790313Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>' being compiled
+2026-04-12T16:25:54.0790771Z
+2026-04-12T16:25:54.0791547Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(420,7): warning C4624: 'llvm::LShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0792473Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0792759Z
+2026-04-12T16:25:54.0793590Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,34>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0794674Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0795165Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:54.0795757Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:54.0796172Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(425,14):
+2026-04-12T16:25:54.0796902Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,34>' being compiled
+2026-04-12T16:25:54.0797333Z
+2026-04-12T16:25:54.0798269Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(424,7): warning C4624: 'llvm::GEPOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0799200Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0799477Z
+2026-04-12T16:25:54.0814985Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,47>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0816876Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0817324Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:54.0817781Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:54.0818207Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(566,14):
+2026-04-12T16:25:54.0818817Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,47>' being compiled
+2026-04-12T16:25:54.0819248Z
+2026-04-12T16:25:54.0820063Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(565,7): warning C4624: 'llvm::PtrToIntOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0821024Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0821307Z
+2026-04-12T16:25:54.0827081Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,49>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0828957Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0829725Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:54.0830512Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:54.0831297Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(603,14):
+2026-04-12T16:25:54.0832319Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,49>' being compiled
+2026-04-12T16:25:54.0833082Z
+2026-04-12T16:25:54.0834505Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(602,7): warning C4624: 'llvm::BitCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0836187Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0836691Z
+2026-04-12T16:25:54.0838828Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,50>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0879894Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0880981Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:54.0881898Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:54.0882682Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(627,14):
+2026-04-12T16:25:54.0883748Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,50>' being compiled
+2026-04-12T16:25:54.0884517Z
+2026-04-12T16:25:54.0886035Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(626,7): warning C4624: 'llvm::AddrSpaceCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:54.0887859Z   (compiling source file '../../passes/src/StringEncryption.cpp')
+2026-04-12T16:25:54.0888369Z
+2026-04-12T16:25:54.8626889Z   SIMDObfuscation.cpp
+2026-04-12T16:25:55.7863663Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(77,7): warning C4624: 'llvm::OverflowingBinaryOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.7864824Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.7865136Z
+2026-04-12T16:25:55.7877987Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(155,7): warning C4624: 'llvm::PossiblyExactOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.7879023Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.7879329Z
+2026-04-12T16:25:55.7891252Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(205,7): warning C4624: 'llvm::FPMathOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.7892286Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.7892598Z
+2026-04-12T16:25:55.7911499Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.7913180Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.7913788Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:55.7914236Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:55.7914897Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(405,12):
+2026-04-12T16:25:55.7916047Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>' being compiled
+2026-04-12T16:25:55.7916784Z
+2026-04-12T16:25:55.7918028Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(404,7): warning C4624: 'llvm::AddOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.7920035Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.7920522Z
+2026-04-12T16:25:55.7922138Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.7924360Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.7925691Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:55.7926453Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:55.7927439Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(408,12):
+2026-04-12T16:25:55.7928599Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>' being compiled
+2026-04-12T16:25:55.7929738Z
+2026-04-12T16:25:55.7931119Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(407,7): warning C4624: 'llvm::SubOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.7932724Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.7933209Z
+2026-04-12T16:25:55.7934781Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.7936717Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.7937452Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:55.7938206Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:55.7939335Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(411,12):
+2026-04-12T16:25:55.7940482Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>' being compiled
+2026-04-12T16:25:55.7941323Z
+2026-04-12T16:25:55.7942734Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(410,7): warning C4624: 'llvm::MulOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.7944958Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.7945447Z
+2026-04-12T16:25:55.7947186Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.7949096Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.7949824Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:55.7950576Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:55.7951327Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(414,12):
+2026-04-12T16:25:55.7952479Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>' being compiled
+2026-04-12T16:25:55.7953316Z
+2026-04-12T16:25:55.7954766Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(413,7): warning C4624: 'llvm::ShlOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.7976681Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.7977199Z
+2026-04-12T16:25:55.7978848Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.7980780Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.7981822Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:55.7982597Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:55.7983504Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(418,12):
+2026-04-12T16:25:55.7984589Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>' being compiled
+2026-04-12T16:25:55.7985711Z
+2026-04-12T16:25:55.7987310Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(417,7): warning C4624: 'llvm::AShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.7989020Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.7989524Z
+2026-04-12T16:25:55.7991146Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.7993062Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.7993835Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:55.7994583Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:55.7995340Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(421,12):
+2026-04-12T16:25:55.7996434Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>' being compiled
+2026-04-12T16:25:55.7997258Z
+2026-04-12T16:25:55.7998650Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(420,7): warning C4624: 'llvm::LShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.8000811Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.8001311Z
+2026-04-12T16:25:55.8002792Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,34>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.8004591Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.8005719Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:55.8006474Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:55.8007221Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(425,14):
+2026-04-12T16:25:55.8008246Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,34>' being compiled
+2026-04-12T16:25:55.8008982Z
+2026-04-12T16:25:55.8010397Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(424,7): warning C4624: 'llvm::GEPOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.8012034Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.8012934Z
+2026-04-12T16:25:55.8014643Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,47>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.8016507Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.8017564Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:55.8018373Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:55.8019321Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(566,14):
+2026-04-12T16:25:55.8020352Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,47>' being compiled
+2026-04-12T16:25:55.8021085Z
+2026-04-12T16:25:55.8022472Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(565,7): warning C4624: 'llvm::PtrToIntOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.8024125Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.8024612Z
+2026-04-12T16:25:55.8026494Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,49>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.8028278Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.8029041Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:55.8029769Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:55.8030512Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(603,14):
+2026-04-12T16:25:55.8031523Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,49>' being compiled
+2026-04-12T16:25:55.8032249Z
+2026-04-12T16:25:55.8033682Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(602,7): warning C4624: 'llvm::BitCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.8035363Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.8035869Z
+2026-04-12T16:25:55.8037393Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,50>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.8039163Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.8039898Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:55.8040620Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:55.8041351Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(627,14):
+2026-04-12T16:25:55.8042354Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,50>' being compiled
+2026-04-12T16:25:55.8043080Z
+2026-04-12T16:25:55.8044534Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(626,7): warning C4624: 'llvm::AddrSpaceCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:55.8046425Z   (compiling source file '../../passes/src/SIMDObfuscation.cpp')
+2026-04-12T16:25:55.8046724Z
+2026-04-12T16:25:56.4813870Z   ConstantUnfolding.cpp
+2026-04-12T16:25:57.3823001Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(77,7): warning C4624: 'llvm::OverflowingBinaryOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3824164Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3824487Z
+2026-04-12T16:25:57.3837354Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(155,7): warning C4624: 'llvm::PossiblyExactOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3838570Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3838906Z
+2026-04-12T16:25:57.3849447Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(205,7): warning C4624: 'llvm::FPMathOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3850477Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3850988Z
+2026-04-12T16:25:57.3870995Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3874120Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3875206Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:57.3875847Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:57.3876437Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(405,12):
+2026-04-12T16:25:57.3877466Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>' being compiled
+2026-04-12T16:25:57.3878302Z
+2026-04-12T16:25:57.3879664Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(404,7): warning C4624: 'llvm::AddOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3881048Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3881514Z
+2026-04-12T16:25:57.3883123Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3884703Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3885425Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:57.3886169Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:57.3886888Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(408,12):
+2026-04-12T16:25:57.3888017Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>' being compiled
+2026-04-12T16:25:57.3888842Z
+2026-04-12T16:25:57.3890214Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(407,7): warning C4624: 'llvm::SubOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3891834Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3892302Z
+2026-04-12T16:25:57.3894335Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3896195Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3896951Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:57.3897710Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:57.3898697Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(411,12):
+2026-04-12T16:25:57.3900006Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>' being compiled
+2026-04-12T16:25:57.3900889Z
+2026-04-12T16:25:57.3902257Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(410,7): warning C4624: 'llvm::MulOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3904019Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3904518Z
+2026-04-12T16:25:57.3906193Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3908123Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3908901Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:57.3909650Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:57.3910368Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(414,12):
+2026-04-12T16:25:57.3911525Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>' being compiled
+2026-04-12T16:25:57.3912371Z
+2026-04-12T16:25:57.3914067Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(413,7): warning C4624: 'llvm::ShlOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3915739Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3916234Z
+2026-04-12T16:25:57.3917844Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3919792Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3920538Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:57.3921259Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:57.3921968Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(418,12):
+2026-04-12T16:25:57.3923054Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>' being compiled
+2026-04-12T16:25:57.3923866Z
+2026-04-12T16:25:57.3925255Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(417,7): warning C4624: 'llvm::AShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3926894Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3927387Z
+2026-04-12T16:25:57.3928957Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3930824Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3931552Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:57.3932587Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:57.3933329Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(421,12):
+2026-04-12T16:25:57.3934979Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>' being compiled
+2026-04-12T16:25:57.3935806Z
+2026-04-12T16:25:57.3937159Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(420,7): warning C4624: 'llvm::LShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3938840Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3939329Z
+2026-04-12T16:25:57.3940828Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,34>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3942634Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3943390Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:57.3944147Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:57.3944869Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(425,14):
+2026-04-12T16:25:57.3945920Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,34>' being compiled
+2026-04-12T16:25:57.3946667Z
+2026-04-12T16:25:57.3948070Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(424,7): warning C4624: 'llvm::GEPOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3949353Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3949681Z
+2026-04-12T16:25:57.3950595Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,47>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3951672Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3952126Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:57.3952571Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:57.3953006Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(566,14):
+2026-04-12T16:25:57.3953589Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,47>' being compiled
+2026-04-12T16:25:57.3954016Z
+2026-04-12T16:25:57.3954830Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(565,7): warning C4624: 'llvm::PtrToIntOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3955785Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3956081Z
+2026-04-12T16:25:57.3961732Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,49>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3963614Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3964390Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:57.3965172Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:57.3966159Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(603,14):
+2026-04-12T16:25:57.3967320Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,49>' being compiled
+2026-04-12T16:25:57.3968342Z
+2026-04-12T16:25:57.3970107Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(602,7): warning C4624: 'llvm::BitCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3971830Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3972350Z
+2026-04-12T16:25:57.3977714Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,50>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3979572Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3980363Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:57.3981146Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:57.3981905Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(627,14):
+2026-04-12T16:25:57.3982941Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,50>' being compiled
+2026-04-12T16:25:57.3983695Z
+2026-04-12T16:25:57.3985187Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(626,7): warning C4624: 'llvm::AddrSpaceCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:57.3986950Z   (compiling source file '../../passes/src/ConstantUnfolding.cpp')
+2026-04-12T16:25:57.3987444Z
+2026-04-12T16:25:58.1697337Z   BasicBlockFission.cpp
+2026-04-12T16:25:59.0830458Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(77,7): warning C4624: 'llvm::OverflowingBinaryOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0832289Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0832910Z
+2026-04-12T16:25:59.0846229Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(155,7): warning C4624: 'llvm::PossiblyExactOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0847339Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0847652Z
+2026-04-12T16:25:59.0860290Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(205,7): warning C4624: 'llvm::FPMathOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0861361Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0861674Z
+2026-04-12T16:25:59.0882491Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0885394Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0886557Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:59.0887275Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:59.0887774Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(405,12):
+2026-04-12T16:25:59.0888966Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,13>' being compiled
+2026-04-12T16:25:59.0890699Z
+2026-04-12T16:25:59.0892068Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(404,7): warning C4624: 'llvm::AddOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0893859Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0894188Z
+2026-04-12T16:25:59.0895753Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0897752Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0898539Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:59.0899278Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:59.0900037Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(408,12):
+2026-04-12T16:25:59.0901158Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,15>' being compiled
+2026-04-12T16:25:59.0902026Z
+2026-04-12T16:25:59.0903397Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(407,7): warning C4624: 'llvm::SubOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0905020Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0905502Z
+2026-04-12T16:25:59.0907134Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0908227Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0908672Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:59.0909102Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:59.0909537Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(411,12):
+2026-04-12T16:25:59.0910191Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,17>' being compiled
+2026-04-12T16:25:59.0910674Z
+2026-04-12T16:25:59.0911455Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(410,7): warning C4624: 'llvm::MulOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0912431Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0912737Z
+2026-04-12T16:25:59.0914057Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0915168Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0915621Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:59.0916058Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:59.0916706Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(414,12):
+2026-04-12T16:25:59.0917374Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::OverflowingBinaryOperator,25>' being compiled
+2026-04-12T16:25:59.0917956Z
+2026-04-12T16:25:59.0918754Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(413,7): warning C4624: 'llvm::ShlOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0919678Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0919977Z
+2026-04-12T16:25:59.0920864Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0921892Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0922328Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:59.0922754Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:59.0923183Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(418,12):
+2026-04-12T16:25:59.0923813Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,27>' being compiled
+2026-04-12T16:25:59.0924282Z
+2026-04-12T16:25:59.0925053Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(417,7): warning C4624: 'llvm::AShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0925965Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0926259Z
+2026-04-12T16:25:59.0927139Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0928174Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0928587Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:59.0929013Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:59.0929436Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(421,12):
+2026-04-12T16:25:59.0930038Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::PossiblyExactOperator,26>' being compiled
+2026-04-12T16:25:59.0930504Z
+2026-04-12T16:25:59.0931260Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(420,7): warning C4624: 'llvm::LShrOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0932169Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0932451Z
+2026-04-12T16:25:59.0933265Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,34>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0934606Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0935021Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:59.0935439Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:59.0935852Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(425,14):
+2026-04-12T16:25:59.0936528Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,34>' being compiled
+2026-04-12T16:25:59.0937049Z
+2026-04-12T16:25:59.0937807Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(424,7): warning C4624: 'llvm::GEPOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0938739Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0939034Z
+2026-04-12T16:25:59.0950361Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,47>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0952223Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0952721Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:59.0953188Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:59.0953632Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(566,14):
+2026-04-12T16:25:59.0954216Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,47>' being compiled
+2026-04-12T16:25:59.0954664Z
+2026-04-12T16:25:59.0955493Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(565,7): warning C4624: 'llvm::PtrToIntOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0956487Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0956780Z
+2026-04-12T16:25:59.0963901Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,49>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0965451Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0966178Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:59.0966886Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:59.0967588Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(603,14):
+2026-04-12T16:25:59.0968533Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,49>' being compiled
+2026-04-12T16:25:59.0969240Z
+2026-04-12T16:25:59.0970594Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(602,7): warning C4624: 'llvm::BitCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0972408Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0972893Z
+2026-04-12T16:25:59.0976750Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7): warning C4624: 'llvm::ConcreteOperator<llvm::Operator,50>': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0978426Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0979111Z       D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(390,7):
+2026-04-12T16:25:59.0979808Z       the template instantiation context (the oldest one first) is
+2026-04-12T16:25:59.0980498Z           D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(627,14):
+2026-04-12T16:25:59.0982313Z           see reference to class template instantiation 'llvm::ConcreteOperator<llvm::Operator,50>' being compiled
+2026-04-12T16:25:59.0983031Z
+2026-04-12T16:25:59.0984525Z D:\a\_temp\clang+llvm-20.1.0-x86_64-pc-windows-msvc\include\llvm\IR\Operator.h(626,7): warning C4624: 'llvm::AddrSpaceCastOperator': destructor was implicitly defined as deleted [D:\a\llvm-obfuscator\llvm-obfuscator\build-standalone\passes\obfuscator.vcxproj]
+2026-04-12T16:25:59.0986135Z   (compiling source file '../../passes/src/BasicBlockFission.cpp')
+2026-04-12T16:25:59.0986608Z
+2026-04-12T16:26:00.2128105Z   Generating Code...
+2026-04-12T16:26:04.1569940Z ##[error]Process completed with exit code 1.
+2026-04-12T16:26:04.1783572Z Post job cleanup.
+2026-04-12T16:26:04.3907901Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-04-12T16:26:04.4200276Z git version 2.53.0.windows.2
+2026-04-12T16:26:04.4284098Z Temporarily overriding HOME='D:\a\_temp\ee16a73c-4955-48cd-8599-15c82bc72ef9' before making global git config changes
+2026-04-12T16:26:04.4285475Z Adding repository directory to the temporary git global config as a safe directory
+2026-04-12T16:26:04.4297561Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\llvm-obfuscator\llvm-obfuscator
+2026-04-12T16:26:04.4619981Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-04-12T16:26:04.4982389Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-04-12T16:26:05.0506576Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-04-12T16:26:05.0767565Z http.https://github.com/.extraheader
+2026-04-12T16:26:05.0812168Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2026-04-12T16:26:05.1138281Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-04-12T16:26:05.7260872Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-04-12T16:26:05.7583499Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-04-12T16:26:06.4400045Z Cleaning up orphan processes
+2026-04-12T16:26:06.4706956Z Terminate orphan process: pid (6860) (vctip)
+2026-04-12T16:26:06.4731931Z ##[warning]Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4. Actions will be forced to run with Node.js 24 by default starting June 2nd, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

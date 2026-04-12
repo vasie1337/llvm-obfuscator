@@ -113,14 +113,14 @@ llvm::PassPluginLibraryInfo getObfuscatorPluginInfo() {
     };
 }
 
-// On MSVC, LLVM_ATTRIBUTE_WEAK is empty, so the entry point is not exported from the DLL and
-// opt/clang cannot resolve llvmGetPassPluginInfo (legacy-plugin error).
+// On MSVC, LLVM_ATTRIBUTE_WEAK is empty and LLVM's header already declares
+// llvmGetPassPluginInfo without __declspec(dllexport).  Adding dllexport to
+// the definition causes C2375 (redefinition; different linkage).  Use a
+// linker pragma to export the symbol instead — same effect, no conflict.
 #if defined(_MSC_VER)
-#define LLVM_OBFUSCATOR_PLUGIN_ABI __declspec(dllexport)
-#else
-#define LLVM_OBFUSCATOR_PLUGIN_ABI LLVM_ATTRIBUTE_WEAK
+#pragma comment(linker, "/export:llvmGetPassPluginInfo")
 #endif
 
-extern "C" LLVM_OBFUSCATOR_PLUGIN_ABI ::llvm::PassPluginLibraryInfo llvmGetPassPluginInfo() {
+extern "C" LLVM_ATTRIBUTE_WEAK ::llvm::PassPluginLibraryInfo llvmGetPassPluginInfo() {
     return getObfuscatorPluginInfo();
 }
