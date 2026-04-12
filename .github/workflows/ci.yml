@@ -1,205 +1,147 @@
 name: CI
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-  workflow_dispatch:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+    workflow_dispatch:
 
 env:
-  LLVM_VERSION: "20"
-  BUILD_DIR: build
+    LLVM_VERSION: "20"
+    BUILD_DIR: build
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 permissions:
-  contents: read
+    contents: read
 
 jobs:
-  build-and-test:
-    name: Linux — build & test
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
+    build-and-test:
+        name: Linux — build & test
+        runs-on: ubuntu-24.04
+        steps:
+            - uses: actions/checkout@v4
 
-      - name: Install LLVM ${{ env.LLVM_VERSION }}
-        run: |
-          set -eux
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends ca-certificates curl gnupg
-          curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key \
-            | sudo gpg --dearmor -o /etc/apt/keyrings/llvm.gpg
-          echo "deb [signed-by=/etc/apt/keyrings/llvm.gpg] http://apt.llvm.org/noble/ llvm-toolchain-noble-${LLVM_VERSION} main" \
-            | sudo tee /etc/apt/sources.list.d/llvm.list
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            llvm-${LLVM_VERSION}-dev \
-            clang-${LLVM_VERSION} \
-            llvm-${LLVM_VERSION}-tools \
-            ninja-build
+            - name: Install LLVM ${{ env.LLVM_VERSION }}
+              run: |
+                  set -eux
+                  sudo apt-get update
+                  sudo apt-get install -y --no-install-recommends ca-certificates curl gnupg
+                  curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key \
+                    | sudo gpg --dearmor -o /etc/apt/keyrings/llvm.gpg
+                  echo "deb [signed-by=/etc/apt/keyrings/llvm.gpg] http://apt.llvm.org/noble/ llvm-toolchain-noble-${LLVM_VERSION} main" \
+                    | sudo tee /etc/apt/sources.list.d/llvm.list
+                  sudo apt-get update
+                  sudo apt-get install -y --no-install-recommends \
+                    llvm-${LLVM_VERSION}-dev \
+                    clang-${LLVM_VERSION} \
+                    llvm-${LLVM_VERSION}-tools \
+                    ninja-build
 
-      - name: Configure
-        run: |
-          cmake -B "$BUILD_DIR" -G Ninja \
-            -DLLVM_DIR=/usr/lib/llvm-${LLVM_VERSION}/lib/cmake/llvm \
-            -DCMAKE_BUILD_TYPE=Release
+            - name: Configure
+              run: |
+                  cmake -B "$BUILD_DIR" -G Ninja \
+                    -DLLVM_DIR=/usr/lib/llvm-${LLVM_VERSION}/lib/cmake/llvm \
+                    -DCMAKE_BUILD_TYPE=Release
 
-      - name: Build
-        run: cmake --build "$BUILD_DIR"
+            - name: Build
+              run: cmake --build "$BUILD_DIR"
 
-      - name: Build standalone plugin (rustc / -Z llvm-plugins)
-        run: |
-          cmake -B build-standalone -G Ninja \
-            -DLLVM_DIR=/usr/lib/llvm-${LLVM_VERSION}/lib/cmake/llvm \
-            -DOBFUSCATOR_STANDALONE_MODULE=ON \
-            -DCMAKE_BUILD_TYPE=Release
-          cmake --build build-standalone
+            - name: Build standalone plugin (rustc / -Z llvm-plugins)
+              run: |
+                  cmake -B build-standalone -G Ninja \
+                    -DLLVM_DIR=/usr/lib/llvm-${LLVM_VERSION}/lib/cmake/llvm \
+                    -DOBFUSCATOR_STANDALONE_MODULE=ON \
+                    -DCMAKE_BUILD_TYPE=Release
+                  cmake --build build-standalone
 
-      - name: Upload plugin (Linux)
-        uses: actions/upload-artifact@v4
-        with:
-          name: obfuscator-linux
-          path: ${{ env.BUILD_DIR }}/passes/obfuscator.so
+            - name: Upload plugin (Linux)
+              uses: actions/upload-artifact@v4
+              with:
+                  name: obfuscator-linux
+                  path: ${{ env.BUILD_DIR }}/passes/obfuscator.so
 
-      - name: Upload standalone plugin (Linux x86_64, rustc)
-        uses: actions/upload-artifact@v4
-        with:
-          name: obfuscator-standalone-x86_64-unknown-linux-gnu
-          path: build-standalone/passes/obfuscator.so
+            - name: Upload standalone plugin (Linux x86_64, rustc)
+              uses: actions/upload-artifact@v4
+              with:
+                  name: obfuscator-standalone-x86_64-unknown-linux-gnu
+                  path: build-standalone/passes/obfuscator.so
 
-      - uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: nightly-2025-08-06
+            - uses: dtolnay/rust-toolchain@master
+              with:
+                  toolchain: nightly-2025-08-06
 
-      - name: Verify Rust example crate (standalone plugin)
-        run: |
-          mkdir -p rust-integration/example-crate/vendor
-          cp build-standalone/passes/obfuscator.so rust-integration/example-crate/vendor/obfuscator.so
-          cd rust-integration/example-crate
-          cargo build --release
+            - name: Verify Rust example crate (standalone plugin)
+              run: |
+                  mkdir -p rust-integration/example-crate/vendor
+                  cp build-standalone/passes/obfuscator.so rust-integration/example-crate/vendor/obfuscator.so
+                  cd rust-integration/example-crate
+                  cargo build --release
 
-      - name: Behavioral tests
-        run: ./tests/run_tests.sh
+            - name: Behavioral tests
+              run: ./tests/run_tests.sh
 
-      - name: IR tests (FileCheck)
-        run: ./tests/run_ir_tests.sh
+            - name: IR tests (FileCheck)
+              run: ./tests/run_ir_tests.sh
 
-  windows-standalone:
-    name: Windows — standalone DLL + opt smoke
-    runs-on: windows-latest
-    env:
-      # Must match Linux llvm-*-dev major; full triplet for the MSVC release tarball (includes LLVMConfig.cmake).
-      LLVM_MSVC_TARBALL_VER: "20.1.0"
-    steps:
-      - uses: actions/checkout@v4
+    lint:
+        name: clang-tidy
+        runs-on: ubuntu-24.04
+        steps:
+            - uses: actions/checkout@v4
 
-      # Official .exe installers are toolchain-only and omit lib/cmake/llvm. The MSVC .tar.xz from llvm-project releases does.
-      - name: Install LLVM (MSVC tarball)
-        shell: pwsh
-        run: |
-          $v = $env:LLVM_MSVC_TARBALL_VER
-          $url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-${v}/clang+llvm-${v}-x86_64-pc-windows-msvc.tar.xz"
-          $xz = Join-Path $env:RUNNER_TEMP "clang+llvm-msvc.tar.xz"
-          Invoke-WebRequest -Uri $url -OutFile $xz
-          tar -xf $xz -C $env:RUNNER_TEMP
-          $root = Get-ChildItem $env:RUNNER_TEMP -Directory | Where-Object { $_.Name -like "clang+llvm-*-x86_64-pc-windows-msvc" } | Select-Object -First 1
-          if (-not $root) { throw "Could not find extracted clang+llvm-*-pc-windows-msvc directory under RUNNER_TEMP" }
-          $llvmPath = $root.FullName
-          "LLVM_PATH=$llvmPath" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
-          Join-Path $llvmPath "bin" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+            - name: Install LLVM ${{ env.LLVM_VERSION }} & clang-tidy
+              run: |
+                  set -eux
+                  sudo apt-get update
+                  sudo apt-get install -y --no-install-recommends ca-certificates curl gnupg
+                  curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key \
+                    | sudo gpg --dearmor -o /etc/apt/keyrings/llvm.gpg
+                  echo "deb [signed-by=/etc/apt/keyrings/llvm.gpg] http://apt.llvm.org/noble/ llvm-toolchain-noble-${LLVM_VERSION} main" \
+                    | sudo tee /etc/apt/sources.list.d/llvm.list
+                  sudo apt-get update
+                  sudo apt-get install -y --no-install-recommends \
+                    llvm-${LLVM_VERSION}-dev \
+                    clang-${LLVM_VERSION} \
+                    clang-tidy-${LLVM_VERSION} \
+                    ninja-build
 
-      - name: Configure
-        shell: pwsh
-        run: |
-          $llvmCmake = Join-Path $env:LLVM_PATH "lib\cmake\llvm"
-          if (-not (Test-Path (Join-Path $llvmCmake "LLVMConfig.cmake"))) {
-            throw "LLVMConfig.cmake not found at $llvmCmake (broken LLVM layout?)"
-          }
-          cmake -B build-standalone -G "Visual Studio 17 2022" -A x64 `
-            -DLLVM_DIR="$llvmCmake" `
-            -DOBFUSCATOR_STANDALONE_MODULE=ON
+            - name: Configure (compile_commands.json)
+              run: |
+                  cmake -B "$BUILD_DIR" -G Ninja \
+                    -DLLVM_DIR=/usr/lib/llvm-${LLVM_VERSION}/lib/cmake/llvm \
+                    -DCMAKE_BUILD_TYPE=Release \
+                    -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
-      - name: Build
-        run: cmake --build build-standalone --config Release
+            - name: Run clang-tidy
+              run: |
+                  clang-tidy-${LLVM_VERSION} \
+                    -p "$BUILD_DIR" \
+                    --warnings-as-errors='*' \
+                    passes/src/*.cpp
 
-      - name: Stage DLL for artifact
-        shell: pwsh
-        run: |
-          $dll = Get-ChildItem -Path build-standalone -Recurse -Filter obfuscator.dll | Select-Object -First 1
-          if (-not $dll) { throw "obfuscator.dll not found under build-standalone" }
-          Copy-Item $dll.FullName obfuscator-x86_64-pc-windows-msvc.dll
+    format:
+        name: clang-format
+        runs-on: ubuntu-24.04
+        steps:
+            - uses: actions/checkout@v4
 
-      - name: Opt smoke test
-        shell: pwsh
-        run: |
-          $opt = Join-Path $env:LLVM_PATH "bin\opt.exe"
-          & $opt --load-pass-plugin="$(Resolve-Path obfuscator-x86_64-pc-windows-msvc.dll)" `
-            -passes=instsub -disable-output tests/ir/instsub_add.ll
+            - name: Install clang-format
+              run: |
+                  set -eux
+                  sudo apt-get update
+                  sudo apt-get install -y --no-install-recommends ca-certificates curl gnupg
+                  curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key \
+                    | sudo gpg --dearmor -o /etc/apt/keyrings/llvm.gpg
+                  echo "deb [signed-by=/etc/apt/keyrings/llvm.gpg] http://apt.llvm.org/noble/ llvm-toolchain-noble-${LLVM_VERSION} main" \
+                    | sudo tee /etc/apt/sources.list.d/llvm.list
+                  sudo apt-get update
+                  sudo apt-get install -y --no-install-recommends clang-format-${LLVM_VERSION}
 
-      - name: Upload standalone plugin (Windows x86_64 MSVC)
-        uses: actions/upload-artifact@v4
-        with:
-          name: obfuscator-standalone-x86_64-pc-windows-msvc
-          path: obfuscator-x86_64-pc-windows-msvc.dll
-
-  lint:
-    name: clang-tidy
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install LLVM ${{ env.LLVM_VERSION }} & clang-tidy
-        run: |
-          set -eux
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends ca-certificates curl gnupg
-          curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key \
-            | sudo gpg --dearmor -o /etc/apt/keyrings/llvm.gpg
-          echo "deb [signed-by=/etc/apt/keyrings/llvm.gpg] http://apt.llvm.org/noble/ llvm-toolchain-noble-${LLVM_VERSION} main" \
-            | sudo tee /etc/apt/sources.list.d/llvm.list
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            llvm-${LLVM_VERSION}-dev \
-            clang-${LLVM_VERSION} \
-            clang-tidy-${LLVM_VERSION} \
-            ninja-build
-
-      - name: Configure (compile_commands.json)
-        run: |
-          cmake -B "$BUILD_DIR" -G Ninja \
-            -DLLVM_DIR=/usr/lib/llvm-${LLVM_VERSION}/lib/cmake/llvm \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
-
-      - name: Run clang-tidy
-        run: |
-          clang-tidy-${LLVM_VERSION} \
-            -p "$BUILD_DIR" \
-            --warnings-as-errors='*' \
-            passes/src/*.cpp
-
-  format:
-    name: clang-format
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install clang-format
-        run: |
-          set -eux
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends ca-certificates curl gnupg
-          curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key \
-            | sudo gpg --dearmor -o /etc/apt/keyrings/llvm.gpg
-          echo "deb [signed-by=/etc/apt/keyrings/llvm.gpg] http://apt.llvm.org/noble/ llvm-toolchain-noble-${LLVM_VERSION} main" \
-            | sudo tee /etc/apt/sources.list.d/llvm.list
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends clang-format-${LLVM_VERSION}
-
-      - name: Check formatting
-        run: |
-          find passes/src passes/include \( -name '*.cpp' -o -name '*.h' \) \
-            | xargs clang-format-${LLVM_VERSION} --dry-run --Werror
+            - name: Check formatting
+              run: |
+                  find passes/src passes/include \( -name '*.cpp' -o -name '*.h' \) \
+                    | xargs clang-format-${LLVM_VERSION} --dry-run --Werror

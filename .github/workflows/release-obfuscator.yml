@@ -1,137 +1,81 @@
 name: Release obfuscator plugin
 
 on:
-  push:
-    tags:
-      - "v*"
+    push:
+        tags:
+            - "v*"
 
 permissions:
-  contents: read
+    contents: read
 
 env:
-  LLVM_VERSION: "20"
-  BUILD_DIR: build-standalone
+    LLVM_VERSION: "20"
+    BUILD_DIR: build-standalone
 
 jobs:
-  linux-release:
-    name: Linux x86_64 standalone .so
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
+    linux-release:
+        name: Linux x86_64 standalone .so
+        runs-on: ubuntu-24.04
+        steps:
+            - uses: actions/checkout@v4
 
-      - name: Install LLVM ${{ env.LLVM_VERSION }}
-        run: |
-          set -eux
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends ca-certificates curl gnupg
-          curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key \
-            | sudo gpg --dearmor -o /etc/apt/keyrings/llvm.gpg
-          echo "deb [signed-by=/etc/apt/keyrings/llvm.gpg] http://apt.llvm.org/noble/ llvm-toolchain-noble-${LLVM_VERSION} main" \
-            | sudo tee /etc/apt/sources.list.d/llvm.list
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            llvm-${LLVM_VERSION}-dev \
-            clang-${LLVM_VERSION} \
-            ninja-build
+            - name: Install LLVM ${{ env.LLVM_VERSION }}
+              run: |
+                  set -eux
+                  sudo apt-get update
+                  sudo apt-get install -y --no-install-recommends ca-certificates curl gnupg
+                  curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key \
+                    | sudo gpg --dearmor -o /etc/apt/keyrings/llvm.gpg
+                  echo "deb [signed-by=/etc/apt/keyrings/llvm.gpg] http://apt.llvm.org/noble/ llvm-toolchain-noble-${LLVM_VERSION} main" \
+                    | sudo tee /etc/apt/sources.list.d/llvm.list
+                  sudo apt-get update
+                  sudo apt-get install -y --no-install-recommends \
+                    llvm-${LLVM_VERSION}-dev \
+                    clang-${LLVM_VERSION} \
+                    ninja-build
 
-      - name: Configure (standalone module)
-        run: |
-          cmake -B "$BUILD_DIR" -G Ninja \
-            -DLLVM_DIR=/usr/lib/llvm-${LLVM_VERSION}/lib/cmake/llvm \
-            -DOBFUSCATOR_STANDALONE_MODULE=ON \
-            -DCMAKE_BUILD_TYPE=Release
+            - name: Configure (standalone module)
+              run: |
+                  cmake -B "$BUILD_DIR" -G Ninja \
+                    -DLLVM_DIR=/usr/lib/llvm-${LLVM_VERSION}/lib/cmake/llvm \
+                    -DOBFUSCATOR_STANDALONE_MODULE=ON \
+                    -DCMAKE_BUILD_TYPE=Release
 
-      - name: Build
-        run: cmake --build "$BUILD_DIR"
+            - name: Build
+              run: cmake --build "$BUILD_DIR"
 
-      - name: Stage Linux asset
-        run: |
-          cp "${BUILD_DIR}/passes/obfuscator.so" obfuscator-x86_64-unknown-linux-gnu.so
+            - name: Stage Linux asset
+              run: |
+                  cp "${BUILD_DIR}/passes/obfuscator.so" obfuscator-x86_64-unknown-linux-gnu.so
 
-      - name: Upload Linux artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-linux-so
-          path: obfuscator-x86_64-unknown-linux-gnu.so
+            - name: Upload Linux artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: release-linux-so
+                  path: obfuscator-x86_64-unknown-linux-gnu.so
 
-  windows-release:
-    name: Windows x86_64 MSVC standalone .dll
-    runs-on: windows-latest
-    env:
-      LLVM_MSVC_TARBALL_VER: "20.1.0"
-    steps:
-      - uses: actions/checkout@v4
+    publish:
+        name: Publish GitHub Release
+        needs: [linux-release]
+        runs-on: ubuntu-24.04
+        permissions:
+            contents: write
+        steps:
+            - name: Download Linux artifact
+              uses: actions/download-artifact@v4
+              with:
+                  name: release-linux-so
+                  path: release-assets
 
-      - name: Install LLVM (MSVC tarball)
-        shell: pwsh
-        run: |
-          $v = $env:LLVM_MSVC_TARBALL_VER
-          $url = "https://github.com/llvm/llvm-project/releases/download/llvmorg-${v}/clang+llvm-${v}-x86_64-pc-windows-msvc.tar.xz"
-          $xz = Join-Path $env:RUNNER_TEMP "clang+llvm-msvc.tar.xz"
-          Invoke-WebRequest -Uri $url -OutFile $xz
-          tar -xf $xz -C $env:RUNNER_TEMP
-          $root = Get-ChildItem $env:RUNNER_TEMP -Directory | Where-Object { $_.Name -like "clang+llvm-*-x86_64-pc-windows-msvc" } | Select-Object -First 1
-          if (-not $root) { throw "Could not find extracted clang+llvm-*-pc-windows-msvc directory under RUNNER_TEMP" }
-          $llvmPath = $root.FullName
-          "LLVM_PATH=$llvmPath" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
-          Join-Path $llvmPath "bin" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+            - name: SHA256 checksums
+              run: |
+                  cd release-assets
+                  sha256sum obfuscator-x86_64-unknown-linux-gnu.so > SHA256SUMS
 
-      - name: Configure
-        shell: pwsh
-        run: |
-          $llvmCmake = Join-Path $env:LLVM_PATH "lib\cmake\llvm"
-          if (-not (Test-Path (Join-Path $llvmCmake "LLVMConfig.cmake"))) {
-            throw "LLVMConfig.cmake not found at $llvmCmake (broken LLVM layout?)"
-          }
-          cmake -B build-standalone -G "Visual Studio 17 2022" -A x64 `
-            -DLLVM_DIR="$llvmCmake" `
-            -DOBFUSCATOR_STANDALONE_MODULE=ON
-
-      - name: Build
-        run: cmake --build build-standalone --config Release
-
-      - name: Stage Windows asset
-        shell: pwsh
-        run: |
-          $dll = Get-ChildItem -Path build-standalone -Recurse -Filter obfuscator.dll | Select-Object -First 1
-          if (-not $dll) { throw "obfuscator.dll not found under build-standalone" }
-          Copy-Item $dll.FullName obfuscator-x86_64-pc-windows-msvc.dll
-
-      - name: Upload Windows artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-windows-dll
-          path: obfuscator-x86_64-pc-windows-msvc.dll
-
-  publish:
-    name: Publish GitHub Release
-    needs: [linux-release, windows-release]
-    runs-on: ubuntu-24.04
-    permissions:
-      contents: write
-    steps:
-      - name: Download Linux artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: release-linux-so
-          path: release-assets
-
-      - name: Download Windows artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: release-windows-dll
-          path: release-assets
-
-      - name: SHA256 checksums
-        run: |
-          cd release-assets
-          sha256sum obfuscator-x86_64-unknown-linux-gnu.so obfuscator-x86_64-pc-windows-msvc.dll > SHA256SUMS
-
-      - name: Publish GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            release-assets/obfuscator-x86_64-unknown-linux-gnu.so
-            release-assets/obfuscator-x86_64-pc-windows-msvc.dll
-            release-assets/SHA256SUMS
-          generate_release_notes: true
+            - name: Publish GitHub Release
+              uses: softprops/action-gh-release@v2
+              with:
+                  files: |
+                      release-assets/obfuscator-x86_64-unknown-linux-gnu.so
+                      release-assets/SHA256SUMS
+                  generate_release_notes: true
