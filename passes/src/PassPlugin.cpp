@@ -101,9 +101,10 @@ llvm::PassPluginLibraryInfo getObfuscatorPluginInfo() {
                     }
                 });
 
-            // String encryption runs last so it sees the final set of
-            // string literals after all other optimizations.
-            PB.registerOptimizerLastEPCallback(
+            // String encryption: use OptimizerEarly so it fires during both
+            // --emit=llvm-ir and --emit=link builds.  OptimizerLast is not
+            // called by rustc's binary-generation pipeline.
+            PB.registerOptimizerEarlyEPCallback(
                 [](ModulePassManager &MPM, OptimizationLevel Level, ThinOrFullLTOPhase) {
                     if (Level != OptimizationLevel::O0) {
                         MPM.addPass(StringEncryption());

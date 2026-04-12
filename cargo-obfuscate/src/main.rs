@@ -135,9 +135,15 @@ fn main() {
         "-Z llvm-plugins={}",
         plugin_path.to_str().expect("plugin path must be valid UTF-8")
     );
+    // --emit=llvm-ir must be present alongside the default dep-info,link emit
+    // because rustc only fires module-level LLVM extension points (needed for
+    // StringEncryption) when the IR-emission path is active.  The .ll files
+    // land in target/*/deps/ and are harmless (target/ is gitignored).
+    let extra = "--emit=llvm-ir";
+    let base_flags = format!("{plugin_flag} {extra}");
     let rustflags = match env::var("RUSTFLAGS").ok().filter(|s| !s.is_empty()) {
-        Some(existing) => format!("{existing} {plugin_flag}"),
-        None => plugin_flag,
+        Some(existing) => format!("{existing} {base_flags}"),
+        None => base_flags,
     };
 
     let mut cmd_args = vec![format!("+{NIGHTLY}")];
